@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的订单界面</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<style>
+			*{
+				margin: 0; padding: 0;
+			}
+			ul {
+				list-style: none;
+			}
+			.order-navigation{
+				margin-top: 45px;
+			}
+			.order-navigation-ul1{
+				height: 25px;
+				line-height: 25px;
+			}
+			.order-navigation-ul1>li{
+				float: left;
+				text-align: center;
+				width: 20%;
+				font-size:14px ;
+				height: 30px;
+				line-height: 30px;			
+			}
+			.order-one{
+				margin: 10px 0;
+				background-color: white;
+				border-radius:10px ;
+				padding: 5px;
+			}
+			
+			.order-one-span1{
+				color: #333333;
+			}
+			.order-one-table1{
+				width: 100%;
+				color: #333333;
+			}
+			.order-one-span1{
+				float: right;
+				color: #FF6600;
+			}
+			.order-one-img1{
+				width: 60px;
+				border-radius:5px ;
+				overflow: hidden;
+			}
+			.order-one-td1{
+				width: 60%;
+			}
+			.order-one-p1{
+				color: #333333;
+			}
+			.order-one-table1>tbody>tr>td>p,.order-one>p{
+				margin: 0 0 0 0;
+			}
+			.order-one-span3{
+				float: right;
+				font-size: 14px;
+				padding: 3px;
+			}
+			.order-one-span4{
+				font-size: 16px;
+			}
+			.order-one-a1{
+				padding: 4px 10px;
+				border: 1px solid #777777;
+				color: #333333;
+				border-radius:10px ;
+			}
+			.order-one-a2{
+				border: 1px solid #FF6600;
+				color: #FF6600;
+			}
+			.order-bottomAll{
+				padding: 0 5px; 
+				
+			}
+			.order-navigation-li4{
+				color: #FF6600;
+				border-bottom: 1px solid #FF6600;
+			}
+		</style>
+	</head>
+	<body>
+		<!--全部的开始-->
+		<div class="">
+			<!--头部-->
+			<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
+				<a href="main.html">
+					<span class="mui-icon mui-icon-back"></span>
+				</a>
+				<h1 class="mui-title">
+				 <span>我的订单</span>
+				</h1>
+			<!--头部结束-->
+			</header>
+			<!--下面的全部开始-->
+			<div class="order-bottomAll">
+			<!--上面的导航开始-->
+			<div class="order-navigation">
+				<ul class="order-navigation-ul1"> 
+					<li class="order-navigation-li1">全部</li>
+					<li class="order-navigation-li2">待付款</li>
+					<li class="order-navigation-li3">待发货</li>
+					<li class="order-navigation-li4">待收货</li>
+					<li class="order-navigation-li5">待评价</li>
+				</ul>
+			<!--上面的导航结束-->
+			</div>
+			<!--一个订单的开始-->
+			<div class="order-one">
+				<p>
+					<span class="mui-icon mui-icon-home"></span>
+					<span class="order-one-span2">rouge</span>
+					<span class="order-one-span1">卖家已发货</span>
+				</p>
+				<table class="order-one-table1">
+					<tr>
+						<td>
+							<img class="order-one-img1" src="img/xiaotu/xt1.png" />
+						</td>
+						<td class="order-one-td1">
+							<p class="order-one-p1">rouge小黑盒气垫</p>
+							<p>颜色：01号色</p>
+						</td>
+						<td>
+							<p class="order-one-p1">120.00</p>
+							<p>x1</p>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<span class="order-one-span3">
+								共1件商品   合计：￥<span class="order-one-span4">120.00</span>
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<span class="order-one-span3">
+								<a class="order-one-a1 order-one-a3">查看物流</a>
+								<a class="order-one-a1 order-one-a2">确认收货</a>
+							</span>
+						</td>
+					</tr>
+				</table>
+			<!--一个订单的结束-->	
+			</div>
+			<!--下面的全部结束-->
+			</div>
+		</div>
+		
+		<script>
+			(function(win, $) {
+				//点击全部
+				$(".order-navigation-li1").mousedown(function(){
+					
+				});
+				//点击待付款
+				$(".order-navigation-li2").mousedown(function(){
+					$(".order-navigation-li1,.order-navigation-li3,.order-navigation-li4,.order-navigation-li5").css("color","#333333").css("border-bottom","transparent");
+					$(".order-navigation-li2").css("color","#FF6600").css("border-bottom","1px solid #FF6600");
+					$(".order-one-span1").html("等待买家付款");
+					$(".order-one-a3").html("订单详情");
+					$(".order-one-a2").html("付款");
+				});
+				//点击待发货
+				$(".order-navigation-li3").mousedown(function(){
+					$(".order-navigation-li1,.order-navigation-li2,.order-navigation-li4,.order-navigation-li5").css("color","#333333").css("border-bottom","transparent");
+					$(".order-navigation-li3").css("color","#FF6600").css("border-bottom","1px solid #FF6600");
+					$(".order-one-span1").html("等待卖家发货");
+					$(".order-one-a3").html("订单详情");
+					$(".order-one-a2").html("提醒卖家发货");
+				});
+				//点击待收货
+				$(".order-navigation-li4").mousedown(function(){
+					$(".order-navigation-li1,.order-navigation-li2,.order-navigation-li3,.order-navigation-li5").css("color","#333333").css("border-bottom","transparent");
+					$(".order-navigation-li4").css("color","#FF6600").css("border-bottom","1px solid #FF6600");
+					$(".order-one-span1").html("卖家已货");
+					$(".order-one-a3").html("查看物流");
+					$(".order-one-a2").html("确认收货");
+				});
+				//点击待评价
+				$(".order-navigation-li5").mousedown(function(){
+					$(".order-navigation-li1,.order-navigation-li2,.order-navigation-li3,.order-navigation-li4").css("color","#333333").css("border-bottom","transparent");
+					$(".order-navigation-li5").css("color","#FF6600").css("border-bottom","1px solid #FF6600");
+					$(".order-one-span1").html("交易成功");
+					$(".order-one-a3").html("查看物流");
+					$(".order-one-a2").html("评价");
+				});
+					})(window, $);
+			
+		</script>
+	</body>
+</html>

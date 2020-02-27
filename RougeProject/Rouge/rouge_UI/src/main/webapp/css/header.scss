@@ -1,0 +1,42 @@
+$width:950px;
+$border:#e0e0e0;
+$font-family:Constantia;
+$color: #636363;
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#big,
+body,
+html {
+    overflow: visible;
+}
+
+#header {
+    margin: auto;
+    width: $width;
+    height: 160px;
+    position: relative;
+}
+
+.header_logo {
+    width: 200px;
+    height: 65px;
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translate(-50%, 0);
+    line-height: 60px;
+    font-size: 60px;
+    text-align: center;
+    font-family:$font-family ;
+}
+
+.header_title {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+}

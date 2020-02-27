@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.ICommodityTypeDao">
+    <insert id="addCommodityType" parameterType="com.chenjiahao.rouge.entity.Commoditytype">
+        INSERT INTO `commodityType` (comtname) VALUES
+            (#{comtname})
+    </insert>
+
+    <select id="getAllCommodityType" resultType="com.chenjiahao.rouge.entity.Commoditytype">
+        SELECT * FROM commodityType
+    </select>
+
+    <delete id="delCommodityType">
+        DELETE FROM commodityType
+        WHERE comtid in
+        <foreach collection="list" item="comtids" open="(" separator="," close=")">
+            #{comtids}
+        </foreach>
+    </delete>
+</mapper>

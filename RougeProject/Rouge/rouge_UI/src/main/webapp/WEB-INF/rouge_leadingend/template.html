@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css"/>
+		<!--<script src="js/jquery/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="../../js/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="result">
+		</div>
+		<script src="../../js/template/template-web.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/html" id="template1">
+			<h2>姓名：{{name}}</h2>
+			<ul>
+				{{each hobbies as hobby index}}
+				<li>
+					{{index+1}} {{hobby.uname}} {{hobby.umail}}
+				</li>
+				{{/each}}
+			</ul>
+			
+			<div id="pageRougeUser"></div>
+		</script>
+		<script type="text/javascript">
+			var data = {
+				isShow: true,
+				name: "Tom",
+				hobbies: [{
+					"uid": 1,
+					"aid": "admin",
+					"uidentityid": "43062120000204907X",
+					"uname": "陈佳豪",
+					"umail": "JHaoC@qq.com",
+					"uphone": "15073034644",
+					"uportrait": "admin.jpg"
+				}, {
+					"uid": 2,
+					"aid": "niubihh",
+					"uidentityid": "1086",
+					"uname": "niubihh",
+					"umail": "10086@qq.com",
+					"uphone": "10086",
+					"uportrait": "10086.jpg"
+				}, {
+					"uid": 3,
+					"aid": "rose",
+					"uidentityid": "00000000000000",
+					"uname": "rose",
+					"umail": "rose@qq.com",
+					"uphone": "110120119",
+					"uportrait": "rose.jpg"
+				}]
+			};
+			console.log()
+			//用数据与模板渲染(render)出结果
+			var html = template("template1", data);
+			document.getElementById("result").innerHTML = html;
+			
+			  layui.use('laypage', function () {
+        var laypage = layui.laypage;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'pageRougeUser' //注意，这里的 test1 是 ID，不用加 # 号
+            ,
+            count: 100 //数据总数，从服务端得到
+            ,
+            limit: 10,
+            curr: 1, //当前所在哪页
+            jump: function (obj, first) {
+
+            }
+        })
+    })
+		</script>
+	</body>
+
+</html>

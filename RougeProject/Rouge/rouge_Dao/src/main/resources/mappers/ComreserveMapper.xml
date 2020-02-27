@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.IComreserveDao">
+
+
+    <insert id="addComreserve" parameterType="com.chenjiahao.rouge.entity.Order">
+        INSERT INTO comreserve (orderid, comid, crcount, comcolorid) VALUES
+            (#{orderid}, #{comid}, #{crcount}, #{comcolorid})
+    </insert>
+
+
+    <!--//根据订单编号查商品-->
+    <select id="getGoodsByOrderid" resultType="com.chenjiahao.rouge.entity.Comreserve"
+            parameterType="java.lang.Integer">
+        SELECT
+            comreserve.crid,
+            comreserve.orderid,
+            comreserve.comid,
+            comreserve.crcount,
+            comreserve.comcolorid,
+            comreserve.comsizeid
+        FROM
+            comreserve
+        WHERE comreserve.orderid = #{orderid}
+    </select>
+    <!--连接商品表查询-->
+    <select id="getComreserveCommodity" resultMap="getComreserveCommodityMap" parameterType="java.lang.Integer">
+        SELECT
+            comreserve.crcount,
+            commodity.comprice,
+            comreserve.crid,
+            comreserve.orderid,
+            comreserve.comid comid,
+            commodity.comname,
+            commodity.comtid,
+            commodity.comproduce,
+            commodity.comstatic,
+            commodity.cominventory
+        FROM
+            comreserve
+            INNER JOIN commodity ON comreserve.comid = commodity.comid
+        WHERE comreserve.orderid = #{orderid}
+    </select>
+    <resultMap id="getComreserveCommodityMap" type="com.chenjiahao.rouge.entity.Comreserve">
+        <id property="crid" column="crid"></id>
+        <result property="orderid" column="orderid"></result>
+        <result property="comid" column="comid"></result>
+        <result property="crcount" column="crcount"></result>
+        <association property="commodities" javaType="com.chenjiahao.rouge.entity.Commodity">
+            <id property="comid" column="comid"></id>
+            <result property="comname" column="comname"></result>
+            <result property="comtid" column="comtid"></result>
+            <result property="comproduce" column="comproduce"></result>
+            <result property="comstatic" column="comstatic"></result>
+            <result property="cominventory" column="cominventory"></result>
+            <result property="commodity" column="commodity"></result>
+            <result property="comprice" column="comprice"></result>
+        </association>
+    </resultMap>
+</mapper>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>下单</title>
+		<link rel="stylesheet" href="../../css/place_an_order.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+	</head>
+
+	<body>
+		<div id="big">
+			<div id="header">
+				<div class="header_logo">Rouge</div>
+				<div class="header_title">PlACE AN ORDER</div>
+			</div>
+			<hr width="90%" style="margin: auto;" />
+			<div id="body">
+				<div class="body_left">
+					<div>
+						<div class="body_left_title">
+							<span class="body_left_title_inactive" style="color: #000000; font-weight: bold;">1.购物袋</span>
+							<span class="body_left_title_separator">&nbsp;></span>
+							<span class="body_left_title_inactive">2.订单提交</span>
+							<span class="body_left_title_separator">&nbsp;></span>
+							<span class="body_left_title_inactive">3.支付</span>
+						</div>
+
+						<table class="body_left_shoppingcar">
+							<tbody>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><img class="body_left_shoppingcar_img" src="../../img/xiaotu/xt1.png"></td>
+									<td>
+										<h2 class="body_left_shoppingcar_name">Dior迪奥凝脂恒久气垫粉底 </h2>
+										<p class="body_left_shoppingcar_subtitle">Dior迪奥首款锁妆气垫 </p>
+										<div class="body_left_shoppingcar_desc">012 瓷白色 </div>
+									</td>
+									<td>
+										<div class="body_left_shoppingcar_minus" onclick=prodceQuantity("-",this)>-</div>
+										<div class="body_left_shoppingcar_qty">1</div>
+										<div class="body_left_shoppingcar_minus" onclick=prodceQuantity("+",this)>+</div>
+										</td>
+									<td>
+										<span class="price">￥&nbsp;490.00</span>
+									</td>
+									<td class="">X</td>
+								</tr>
+
+								<tr>
+									<td><input type="checkbox"></td>
+									<td><img class="body_left_shoppingcar_img" src="../../img/xiaotu/xt1.png"></td>
+									<td>
+										<h2 class="body_left_shoppingcar_name">Dior迪奥凝脂恒久气垫粉底 </h2>
+										<p class="body_left_shoppingcar_subtitle">Dior迪奥首款锁妆气垫 </p>
+										<div class="body_left_shoppingcar_desc">012 瓷白色 </div>
+									</td>
+									<td>
+										<div class="body_left_shoppingcar_minus" onclick=prodceQuantity("-",this)>-</div>
+										<div class="body_left_shoppingcar_qty">1</div>
+										<div class="body_left_shoppingcar_minus" onclick=prodceQuantity("+",this)>+</div>
+									</td>
+									<td>
+										<span class="price">￥&nbsp;490.00</span>
+									</td>
+									<td class="">X</td>
+								</tr>
+
+							</tbody>
+						</table>
+						<div class="body_left_settle">
+							<div>
+								<p><span>总金额:<span class="price">￥490.00</span></span>
+								</p>
+							</div>
+							<div>
+								<span>总计:</span>
+								<span>1</span>
+							</div>
+						</div>
+						<div class="body_left_submit">
+							<div>继续购物</div>
+							<div>提交订单</div>
+						</div>
+					</div>
+				</div>
+				<div class="body_right">
+
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function prodceQuantity(sum,I){
+				if(sum=="+"){
+					$(I).prev().html((Number($(I).prev().html())+1));
+				}
+				if(sum=="-"){
+					if(Number($(I).next().html())>1){
+						$(I).next().html((Number($(I).next().html())-1));
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<title>商品详情界面</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<style>
+			*{
+				margin: 0; padding: 0;
+			}
+			ul {
+				list-style: none;
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			.top-gwc{
+				float: right;
+				line-height: 48px;
+			}
+			.comm-cont{
+				margin-top:45px ;
+				background-color: white;
+			}
+			.comm-cont-span1{
+				color: #FF6600;
+				font-size: 20px;
+			}
+			.comm-cont-span2{
+				color: #222222;
+				font-size: 20px;
+			}
+			.comm-cont-ul1{
+				height: 30px;
+			}
+			.comm-cont-ul1>li,.comm-bottom-ul1>li{
+				width: 33.3%;
+				float: left;
+				text-align: center;
+				padding-top: 5px;
+			}
+			.comm-cont>p{
+				padding:0 10px ;
+			}
+			.comm-bottom{
+				position: fixed;
+				height: 50px;
+				background-color: white;
+				width: 100%;
+				bottom: 0;
+			}
+			.comm-bottom-div1{
+				float: left;
+				width: 50%;
+			}
+			.comm-bottom-div2{
+				float: right;
+				width: 50%;
+				font-size: 16px;
+				line-height: 50px;
+				
+			}
+			.comm-bottom-div2>a>span{
+			    padding: 8px 10px;
+    			border-radius: 20px;
+    			color: white;
+    			font-size: 14px;
+    			
+			}
+			.comm-bottom-div2-span1{
+				background-color: #FF6600;
+				
+			}
+			.comm-bottom-div2-span2{
+				background-color: #FF0000;
+			}
+			.comm-specification{
+				background-color: white;
+				margin: 5px 0;
+				
+			}
+			.comm-specification-table1,.comm-pictre-img1{
+				width: 100%;
+			}
+			.comm-specification-table1>tbody>tr{
+				height: 30px;
+				font-size: 14px;
+			}
+			.comm-specification-td1{
+				color: #C0C0C3;
+				text-align: center;
+			}
+			.comm-evaluate{
+				background-color: white;
+			}
+			.comm-evaluate-span1{
+				color: #222222;
+				font-size: 16px;
+			}
+			.comm-evaluate-a1{
+				float: right;
+				font-size:16px ;
+				color: #FF6600;
+			}
+			.comm-evaluate-p1{
+				color: #FF6600;
+			}
+			.comm-con-all{
+				margin-bottom: 55px;
+			}
+			.comm-evaluate-p2{
+				height: 42px ;
+				overflow: hidden;
+			}
+			.comm-evaluate>p{
+				padding: 0 10px;
+			}
+			.comm-con-all-p1{
+				text-align: center;
+			}
+		
+		</style>
+	</head>
+
+	<body>
+		<!--全部-->
+		<div>
+			<!--头部-->
+			<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
+				<a href="main.html">
+					<span class="mui-icon mui-icon-back"></span>
+				</a>
+				<h1 class="mui-title">
+				 <span>商品详情</span>
+				</h1>
+				<a class="top-gwc" target="_blank" href="main.html#shopping"   > 
+					<span title="购物车" class="mui-icon-extra mui-icon-extra-cart"></span>
+				</a>				
+			</header>
+			<!--中间的全部开始-->
+			<div class="comm-con-all">
+			<!--中间商品的开始-->			
+			<div class="comm-cont">
+				<!--轮播图的开始-->
+					<div class="mui-slider" style="height: 365px;">
+						<div class="mui-slider-group mui-slider-loop">
+							<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#"><img class="mui-slider-img1" src="img/xq/xq_2.jpg" /></a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#"><img class="mui-slider-img1" src="img/xq/xq_3.jpg" /></a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#"><img class="mui-slider-img1" src="img/xq/xq_4.jpg" /></a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#"><img class="mui-slider-img1" src="img/xq/xq_5.jpg" /></a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#"><img class="mui-slider-img1" src="img/xq/xq_6.jpg" /></a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#"><img class="mui-slider-img1" src="img/xq/xq_7.jpg" /></a>
+							</div>
+							<!--支持循环，需要重复图片节点-->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#"><img class="mui-slider-img1" src="img/xq/xq_2.jpg" /></a>
+							</div>
+						</div>
+						<!--轮播图的结束-->
+					</div>
+					<p>
+						<span class="comm-cont-span1">￥270</span>
+					</p>
+					<p>
+						<span class="comm-cont-span2">Rouge烈艳蓝金液唇膏</span>
+					</p>
+					<ul class="comm-cont-ul1">
+						<li>快递：0.00</li>
+						<li>月销：1071</li>
+						<li>广东广州</li>
+					</ul>
+			<!--中间商品的结束-->
+			</div>
+			<!--中间白色规格的开始-->
+			<div class="comm-specification">
+				<table class="comm-specification-table1">
+					<tr>
+						<td class="comm-specification-td1">服务</td>
+						<td>过敏包退*破损包退</td>
+					</tr>
+					<tr>
+						<td class="comm-specification-td1">颜色</td>
+						<td>01</td>
+					</tr>
+					<tr>
+						<td class="comm-specification-td1">参数</td>
+						<td>品牌   单品</td>
+					</tr>
+				</table>
+			<!--中间白色规格的结束-->	
+			</div>
+			<!--宝贝评价开始-->
+			<div class="comm-evaluate">
+				<p>
+					<span  class="comm-evaluate-span1">宝贝评价（1232434）</span>
+					<a class="comm-evaluate-a1">查看全部<span class="mui-icon mui-icon-arrowright"></span></a>
+				</p>
+				<p class="comm-evaluate-p1">
+					<span class="mui-icon mui-icon-contact"></span>
+					<span>小******超人</span>
+				</p>
+				<p class="comm-evaluate-p2">
+					<span>之前用白盒的，价格一样，但是这个会水润一点，比较喜欢这个黑盒的，会多多支持的</span>
+				</p>
+			<!--宝贝评价结束-->
+			</div>
+			<p class="comm-con-all-p1">------图片介绍-----</p>
+			<!--图片的开始-->
+			<div>				
+					<img class="comm-pictre-img1" src="img/xxi/xxi_1.JPG" />				
+					<img class="comm-pictre-img1" src="img/xxi/xxi_2.JPG" />				
+					<img class="comm-pictre-img1" src="img/xxi/xxi_3.JPG" />				
+					<img class="comm-pictre-img1" src="img/xxi/xxi_4.JPG" />				
+					<img class="comm-pictre-img1" src="img/xxi/xxi_5.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_6.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_7.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_8.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_9.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_10.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_11.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_15.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_12.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_13.JPG" />
+					<img class="comm-pictre-img1" src="img/xxi/xxi_14.JPG" />
+				
+			<!--图片的结束-->
+			</div>
+			<!--中间的全部结束-->
+			</div>
+		<!--底部的固定开始-->
+		<div class="comm-bottom">
+			<div class="comm-bottom-div1">
+				<ul class="comm-bottom-ul1">
+					<li>
+						<span class="mui-icon mui-icon-home"></span>
+						<p>店铺</p>
+					</li>
+					<li>
+						<span class="mui-icon-extra mui-icon-extra-custom"></span>
+						<p>客服</p>
+					</li>
+					<li>
+						<span class="mui-icon-extra mui-icon-extra-heart"></span>
+						<p>收藏</p>
+					</li>
+				</ul>
+			</div>
+			<!--右边的加入购物车和立即购买-->
+			<div class="comm-bottom-div2">
+				<a>
+					<span class="comm-bottom-div2-span1">加入购物车</span>
+				</a>
+				<a>
+					<span class="comm-bottom-div2-span2">立即购买</span>
+				</a>
+				
+			</div>
+		<!--底部的固定结束-->
+		</div>
+		<!--全部的结束-->
+		</div>
+		
+		<script>
+			
+			;
+			(function(win, $) {
+				//获得slider插件对象图片轮播
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval:5000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+				
+					})(window, $);
+			
+		</script>
+	</body>
+
+</html>

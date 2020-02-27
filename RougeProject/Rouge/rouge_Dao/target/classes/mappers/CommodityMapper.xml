@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.ICommodityDao">
+    <select id="getAllCommodity" resultType="com.chenjiahao.rouge.entity.Commodity"
+            parameterType="com.chenjiahao.rouge.params.CommodityParams">
+        SELECT
+        commodity.comid,
+        commodity.comname,
+        commodity.comtid comtid,
+        commodity.comprice,
+        commodity.comproduce,
+        commodity.comstatic,
+        commodity.cominventory,
+        commoditytype.comtname
+        FROM
+        commodity
+        INNER JOIN commoditytype ON commodity.comtid = commoditytype.comtid
+        <where>
+            <if test="comid!=0">
+                and commodity.comid=#{comid}
+            </if>
+            <if test="comname!=null and comname!=''">
+                and comname like concat(concat('%',#{comname}),'%')
+            </if>
+            <if test="compriceMin!=0 and compriceMax!=0">
+                and comprice &gt; #{compriceMin} and comprice &lt; #{compriceMax}
+            </if>
+            <if test="comtid!=0">
+                and commodity.comtid=#{comtid}
+            </if>
+            <if test="comstatic!=-1">
+                and comstatic=#{comstatic}
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="addCommodity" useGeneratedKeys="true" keyProperty="comid"
+            parameterType="com.chenjiahao.rouge.entity.Commodity">
+        INSERT INTO `commodity` (comname, comtid, comprice, comproduce, comstatic, cominventory) VALUES
+            (#{comname}, #{comtid}, #{comprice}, #{comproduce}, DEFAULT, #{cominventory});
+    </insert>
+    <update id="updateCommodity" parameterType="com.chenjiahao.rouge.entity.Commodity">
+        UPDATE commodity
+        SET comname   = #{comname}, comtid = #{comtid}, comprice = #{comprice}, comproduce = #{comproduce},
+            comstatic = #{comstatic}, cominventory = #{cominventory}
+        WHERE comid = #{comid}
+    </update>
+
+    <select id="getPageCommodity" resultType="com.chenjiahao.rouge.entity.Commodity"
+            parameterType="com.chenjiahao.rouge.params.CommodityParams">
+        SELECT
+        commodity.comid,
+        commodity.comname,
+        commodity.comtid comtid,
+        commodity.comprice,
+        commodity.comproduce,
+        commodity.comstatic,
+        commodity.cominventory,
+        commoditytype.comtname
+        FROM
+        commodity
+        INNER JOIN commoditytype ON commodity.comtid = commoditytype.comtid
+        <where>
+            <if test="comname!=null and comname!=''">
+                and comname like concat(concat('%',#{comname}),'%')
+            </if>
+            <if test="compriceMin!=0 and compriceMax!=0">
+                and comprice &gt; #{compriceMin} and comprice &lt; #{compriceMax}
+            </if>
+            <if test="comtid!=0">
+                and commodity.comtid=#{comtid}
+            </if>
+            <if test="comstatic!=-1">
+                and comstatic=#{comstatic}
+            </if>
+        </where>
+        LIMIT #{pageNo},#{pageSize}
+    </select>
+
+
+    <select id="getAllGoods" resultMap="getAllGoodsMap">
+        SELECT
+            commodity.comid comid,
+            commodity.comname,
+            commodity.comtid,
+            commodity.comprice,
+            commodity.comproduce,
+            commodity.comstatic,
+            commodity.cominventory,
+            commodityimg.comiid,
+            commodityimg.imgpath,
+            comdiscount.comdisid,
+            comdiscount.discount
+        FROM
+            commodity
+            INNER JOIN commodityimg ON commodity.comid = commodityimg.comid
+            LEFT JOIN comdiscount ON comdiscount.comid = commodity.comid
+        <where>
+            <if test="comtid!=0">
+                and commodity.comtid=#{comtid}
+            </if>
+        </where>
+    </select>
+    <resultMap id="getAllGoodsMap" type="com.chenjiahao.rouge.entity.Commodity">
+        <id property="comid" column="comid"></id>
+        <result property="comname" column="comname"></result>
+        <result property="comtid" column="comtid"></result>
+        <result property="comprice" column="comprice"></result>
+        <result property="comproduce" column="comproduce"></result>
+        <result property="comstatic" column="comstatic"></result>
+        <result property="cominventory" column="cominventory"></result>
+
+        <association property="comdiscount" javaType="com.chenjiahao.rouge.entity.Comdiscount">
+            <id property="comdisid" column="comdisid"></id>
+            <result property="comid" column="comid"></result>
+            <result property="discount" column="discount"></result>
+        </association>
+        <collection property="commodityimgs" ofType="com.chenjiahao.rouge.entity.Commodityimg">
+            <id property="comiid" column="comiid"/>
+            <result property="comid" column="comid"/>
+            <result property="imgpath" column="imgpath"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="getAllCommodityDetails" resultMap="getAllCommodityDetailsMap" parameterType="String">
+        SELECT
+        commodity.comid comid,
+        commodity.comname,
+        commodity.comtid,
+        commodity.comprice,
+        commodity.comproduce,
+        commodity.comstatic,
+        commodity.cominventory,
+        comcolor.comcolorid,
+        comcolor.color,
+        comdescribe.comdescribeid,
+        comdescribe.img,
+        comdescribe.video,
+        comdescribe.proposal,
+        comdescribe.formula,
+        comdescribe.diyparam,
+        comsize.comsizeid,
+        comsize.size,
+        commodityimg.comiid,
+        commodityimg.imgpath,
+        comdiscount.comdisid,
+        comdiscount.discount
+        FROM
+        commodity
+        LEFT JOIN comcolor ON commodity.comid = comcolor.comid
+        INNER JOIN comdescribe ON commodity.comid = comdescribe.comid
+        LEFT JOIN comsize ON commodity.comid = comsize.comid
+        LEFT JOIN commodityimg ON commodity.comid = commodityimg.comid
+        LEFT JOIN comdiscount ON commodity.comid = comdiscount.comid
+        <where>
+            <if test="comid!=''and comid!=null">
+                commodity.comid=#{comid}
+            </if>
+        </where>
+    </select>
+    <resultMap id="getAllCommodityDetailsMap" type="com.chenjiahao.rouge.entity.Commodity">
+        <id property="comid" column="comid"></id>
+        <result property="comname" column="comname"></result>
+        <result property="comtid" column="comtid"></result>
+        <result property="comprice" column="comprice"></result>
+        <result property="comproduce" column="comproduce"></result>
+        <result property="comstatic" column="comstatic"></result>
+        <result property="cominventory" column="cominventory"></result>
+
+        <association property="describe" javaType="com.chenjiahao.rouge.entity.Comdescribe">
+            <id property="comdescribeid" column="comdescribeid"></id>
+            <result property="img" column="img"></result>
+            <result property="video" column="video"></result>
+            <result property="proposal" column="proposal"></result>
+            <result property="formula" column="formula"></result>
+            <result property="diyparam" column="diyparam"></result>
+        </association>
+
+        <association property="comdiscount" javaType="com.chenjiahao.rouge.entity.Comdiscount">
+            <id property="comdisid" column="comdisid"></id>
+            <result property="discount" column="discount"></result>
+        </association>
+        <collection property="comcolors" ofType="com.chenjiahao.rouge.entity.Comcolor">
+            <id property="comcolorid" column="comcolorid"/>
+            <result property="color" column="color"/>
+        </collection>
+
+        <collection property="comsizes" ofType="com.chenjiahao.rouge.entity.Comsize">
+            <id property="comsizeid" column="comsizeid"/>
+            <result property="size" column="size"/>
+        </collection>
+        <collection property="commodityimgs" ofType="com.chenjiahao.rouge.entity.Commodityimg">
+            <id property="comiid" column="comiid"/>
+            <result property="imgpath" column="imgpath"/>
+        </collection>
+    </resultMap>
+
+    <select id="getGoodsCrcountByid" resultType="Integer" parameterType="String">
+        SELECT comreserve.crcount
+        FROM
+            comreserve
+            INNER JOIN `order` ON comreserve.orderid = order.orderid
+        WHERE order.DeliverStatic = 1 AND comreserve.comid = #{comid}
+
+    </select>
+
+</mapper>

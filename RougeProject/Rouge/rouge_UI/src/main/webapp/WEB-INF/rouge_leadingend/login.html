@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../../css/login.css"/>
+</head>
+
+<body>
+<div id="big">
+    <input hidden id="height">
+    <input hidden id="width">
+    <div id="primary">
+        <div class="primary_left">
+            <h3>新用户</h3>
+            <h5>创建一个帐户来跟踪和管理您的订单，查找您的所有个人信息和您喜欢的项目。</h5>
+            <a href="/leadingend/logon">
+                <div class="primary_left_logon">创建一个账号</div>
+            </a>
+        </div>
+        <div class="primary_right">
+            <h3>你已经有了一个Rouge帐户</h3>
+            <div class="primary_left_id">
+                <h5>账号</h5>
+                <input type="text" id="aid"/>
+            </div>
+            <div class="primary_left_pwd">
+                <h5>密码 <span id="login_msg" style="font-size: 12px; float: right; color: red;"></span></h5>
+                <input type="password" id="apassword"/>
+            </div>
+            <div class="primary_left_login">登录</div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/jquery/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+    (function () {
+        var login = {
+            init() {
+                login.binding();
+            },
+            isLoginAccount(account) {
+                $.ajax({
+                    type: "POST",
+                    url: "/login/isLoginAccount",
+                    data: account,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json" //预期服务器返回的数据类型
+                }).done(function (data) {
+                    console.log(data);
+                    if (data.code == 1) {
+                        if (data.data[0].atid == 1000) {
+                            top.location.href = "/xadmin/index";
+                        } else {
+                            top.location.href = "/leadingend/index";
+                        }
+                    } else {
+                        $("#login_msg").html("账号或密码错误!!")
+                    }
+                })
+            },
+            binding() {
+                $(".primary_left_login").click(function () {
+                    var account = {
+                        aid: $("#aid").val(),
+                        apassword: $("#apassword").val()
+                    }
+                    login.isLoginAccount(account);
+                });
+            }
+        }
+        login.init();
+    }());
+    $("#height").val($("#primary").height()+200);
+    $("#width").val($("#primary").width());
+</script>
+</body>
+
+</html>

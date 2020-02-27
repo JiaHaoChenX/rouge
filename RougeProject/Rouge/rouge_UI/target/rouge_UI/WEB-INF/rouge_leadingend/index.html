@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rouge购物商城</title>
+    <link rel="stylesheet" href="../../css/index.css"/>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css"/>
+    <style>
+        #comTypeList > li {
+            transition-timing-function: ease-out;
+            transition-duration: 1s;
+        }
+
+        #comTypeList > li:hover {
+            border-bottom: 1px solid white;
+        }
+
+        #comTypeList > li:first-child:hover {
+            border-bottom: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            transition-timing-function: ease-out;
+            transition-duration: 1s;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div id="big">
+    <header id="header">
+        <div class="header_big">
+            <div class="header_big_left">
+                <ul style="margin-bottom: 10PX;" id="comTypeList"></ul>
+            </div>
+
+            <div class="header_big_right">
+                <ul>
+                    <li class="">
+                        <a href="/leadingend/userhome?jump=personal" class="header_big_right_ul_li_su">&#xF2C0;</a>
+                    </li>
+                    <li class="" style="position: relative">
+                        <a href="/leadingend/userhome?jump=shoppingcar" class="header_big_right_ul_li_su"
+                           style="margin: auto">&#xF290;</a>
+                        <span id="ShoppingcarCount"
+                              style="color: black;font-size: 14px;position: absolute;left:49%;top: 60%;transform: translate(-50%,-50%)">0</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!--搜索栏那块-->
+    <div id="grabble">
+        <div class="grabble_big">
+            <div class="grabble_big_left">
+                <div>R</div>
+            </div>
+            <div class="grabble_big_right">
+                <div class="grabble_big_right_input">
+                    <div class="grabble_big_right_input_tb">
+                        <input type="text" placeholder="请输入需要的商品" style="font-size: 12px;"/>
+                        <input type="button" class="grabble_big_right_input_tb_search" value="&#xe801;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--海报那块-->
+    <div id="poster" class="layui-carousel">
+        <div carousel-item>
+            <div style="background-image: url(../../img/hb/hb1.jpg);"></div>
+            <div style="background-image: url(../../img/hb/hb2.jpg);"></div>
+            <div style="background-image: url(../../img/hb/hb3.jpg);"></div>
+        </div>
+    </div>
+
+    <!--官方限时礼遇那块-->
+    <div id="present">
+        <h2>官方限时礼遇</h2>
+        <div>
+            <div>
+                <h1>限时认购包邮,+限量欢迎礼</h1>
+                <h1>任意2件加享，旅游化妆包化妆包</h1>
+                <div>立即了解详情</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="product">
+        <h2 class="product_title">人气必BUY</h2>
+        <div class="product_classify">
+            <div class="OnClickGoodsAll ClickGoodsAll">Discount</div>
+            <div class="OnClickGoodsAll ">Popularity</div>
+            <div class="OnClickGoodsAll">AllGoods</div>
+        </div>
+        <div class="produce_commodity" id="produce_commodity"></div>
+        <div id="footer">
+            <div class="footer-service">
+                <ul>
+                    <li>
+                        <a href="#" style="color: black;"><i class="footer_service_font" align="absmiddle">&#xE634;</i>预约维修服务</a>
+                    </li>
+                    <li>
+                        <i class="footer_service_font">&#xE635;</i>
+                        <a href="#" style="color: black;">7天无理由退货</a>
+                    </li>
+                    <li>
+                        <a href="#" style="color: black;"><i class="footer_service_font">&#xE636;</i>15天免费换货</a>
+                    </li>
+                    <li>
+                        <a href="#" style="color: black;"><i class="footer_service_font">&#xE638;</i>满150元包邮</a>
+                    </li>
+                    <li>
+                        <a href="#" style="color: black;"><i class="footer_service_font">&#xE637;</i>520余家售后网点</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer_clearfix">
+                <div class="">
+                    <dt>帮助中心</dt>
+                    <dd>账户管理</dd>
+                    <dd>购物指南</dd>
+                    <dd>订单操作</dd>
+                </div>
+                <div class="">
+                    <dt>帮助中心</dt>
+                    <dd>账户管理</dd>
+                    <dd>购物指南</dd>
+                    <dd>订单操作</dd>
+                </div>
+                <div class="">
+                    <dt>帮助中心</dt>
+                    <dd>账户管理</dd>
+                    <dd>购物指南</dd>
+                    <dd>订单操作</dd>
+                </div>
+                <div class="">
+                    <dt>帮助中心</dt>
+                    <dd>账户管理</dd>
+                    <dd>购物指南</dd>
+                    <dd>订单操作</dd>
+                </div>
+                <div class="">
+                    <dt>帮助中心</dt>
+                    <dd>账户管理</dd>
+                    <dd>购物指南</dd>
+                    <dd>订单操作</dd>
+                </div>
+                <div class="">
+                    <dt>帮助中心</dt>
+                    <dd>账户管理</dd>
+                    <dd>购物指南</dd>
+                    <dd>订单操作</dd>
+                </div>
+                <div class="">
+                    <p class="p_a">400-100-5678</p>
+                    <p class="p_b">周一至周日 8:00-18:00<br/>(仅收市话费)</p>
+                    <div class="div" style="background: black;color: white">联系客服</div>
+                </div>
+            </div>
+        </div>
+        <div id="info">
+            <div class="info_container">
+                <div class="info_container_logo"></div>
+                <div class="info_container_content">
+                    <p style="font-size: 13PX;">
+                        <a style="color: black;">rouge商城</a>
+                        <span>|</span>
+                        <a style="color: black;">rouge</a>
+                        <span>|</span>
+                        <a style="color: black;">QQ</a>
+                        <span>|</span>
+                        <a style="color: black;">多看</a>
+                        <span>|</span>
+                        <a style="color: black;">游戏</a>
+                        <span>|</span>
+                        <a style="color: black;">路由器</a>
+                        <span>|</span>
+                        <a style="color: black;">政企服务</a>
+                        <span>|</span>
+                        <a style="color: black;">rouge天猫店</a>
+                        <span>|</span>
+                        <a style="color: black;">隐私政策</a>
+                        <span>|</span>
+                        <a style="color: black;">问题反馈</a>
+                        <span>|</span>
+                        <a style="color: black;">廉正举报</a>
+                        <span>|</span>
+                        <a style="color: black;">Select Region</a>
+                    </p>
+
+                    <p style="font-size:12PX;color: #B0B0B0;">©
+                        <a style="font-size:12PX;color: #B0B0B0;">rouge.com</a> 京ICP证110507号
+                        <a style="font-size:12PX;color: #B0B0B0;">京ICP备10046444号</a>
+                        <a style="font-size:12PX;color: #B0B0B0;"> 京公网安备11010802020134号 </a>
+                        <a style="font-size:12PX;color: #B0B0B0;">京网文[2017]1530-131号</a>
+                        <br> 违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</p>
+                </div>
+                <div class="info_container_img">
+                    <ul>
+                        <li style="background: url(../../img/footer/a.png); background-size: 100% 100%;"></li>
+                        <li style="background: url(../../img/footer/b.png); background-size: 100% 100%"></li>
+                        <li style="background: url(../../img/footer/a.png); background-size: 100% 100%"></li>
+                        <li style="background: url(../../img/footer/d.png); background-size: 100% 100%"></li>
+                        <li style="background: url(../../img/footer/e.png); background-size: 100% 100%"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="xm">Rouge! Sincere service for you</div>
+    </div>
+
+
+</div>
+<script type="text/javascript" src="../../js/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../js/layui/layui.js"></script>
+<script src="../../js/template/template-web.js"></script>
+<!--渲染导航栏的模板-->
+<script type="text/html" id="showComType">
+    <li class="header_big_left_ul_li_home" style="margin-bottom: 13px; text-align: right;"><a href="/leadingend/index">&#xe807;</a>
+    </li>
+    {{each data comtype index}}
+    {{if (index+1)%2==0}}
+    <li class="border_right"><a href="/leadingend/comhome.html?comtid={{comtype.comtid}}">{{comtype.comtname}}</a></li>
+    {{else}}
+    <li><a href="/leadingend/comhome.html?comtid={{comtype.comtid}}">{{comtype.comtname}}</a></li>
+    {{/if}}
+
+    {{/each}}
+</script>
+<!--渲染Discount的模板-->
+<script type="text/html" id="showDiscount">
+    {{each data AllGoods index}}
+    {{if AllGoods.comdiscount.discount!=0}}
+    <div style="background-color: white;">
+        <a href="/leadingend/productparticulars.html?comid={{AllGoods.comid}}"><img
+                src='/goods_img/{{AllGoods.commodityimgs[0].imgpath}}' width="100%" height="70%"/></a>
+        <p style="padding: 10px">{{AllGoods.comname}}</p>
+        <p style="padding-left:10px"><span>{{(AllGoods.comprice)*(AllGoods.comdiscount.discount)/10}}￥</span> <span>{{AllGoods.comdiscount.discount}}折</span>
+            <span>{{AllGoods.comprice}}￥</span></p>
+    </div>
+    {{/if}}
+    {{/each}}
+
+
+</script>
+
+<!--渲染AllGoods的模板-->
+<script type="text/html" id="showAllGoods">
+    {{each data AllGoods index}}
+    {{if AllGoods.comdiscount.discount==0}}
+    <div style="background-color: white;">
+        {{if AllGoods.cominventory==0}}
+        <a><img src='/goods_img/{{AllGoods.commodityimgs[0].imgpath}}' width="100%" height="70%"/></a>
+        {{else}}
+        <a href="/leadingend/productparticulars.html?comid={{AllGoods.comid}}"><img
+                src='/goods_img/{{AllGoods.commodityimgs[0].imgpath}}' width="100%" height="70%"/></a>
+        {{/if}}
+        <p style="padding: 10px">{{AllGoods.comname}}</p>
+        <p style="padding-left:10px">
+            <span>{{AllGoods.comprice}}￥</span>
+            {{if AllGoods.cominventory==0}}
+            <span>缺货</span>
+            {{/if}}
+            <span></span>
+    </div>
+    {{else}}
+    <div style="background-color: white;">
+        {{if AllGoods.cominventory==0}}
+        <a><img src='/goods_img/{{AllGoods.commodityimgs[0].imgpath}}' width="100%" height="70%"/></a>
+        {{else}}
+        <a href="/leadingend/productparticulars.html?comid={{AllGoods.comid}}"><img
+                src='/goods_img/{{AllGoods.commodityimgs[0].imgpath}}' width="100%" height="70%"/></a>
+        {{/if}}
+        <p style="padding: 10px">{{AllGoods.comname}}</p>
+        <p style="padding-left:10px"><span>{{(AllGoods.comprice)*(AllGoods.comdiscount.discount)/10}}￥</span> <span>{{AllGoods.comdiscount.discount}}折</span>
+            {{if AllGoods.cominventory==0}}
+            <span>缺货</span>
+            {{/if}}
+            <span>{{AllGoods.comprice}}￥</span>
+        </p>
+    </div>
+    {{/if}}
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+    if (window.top != window.self) {
+        window.top.location.href = window.self.location.href;
+    }
+</script>
+<script type="text/javascript">
+
+    (function () {
+        var comtype = {
+            init() {
+                comtype.getAllCommodityType();
+                comtype.getAllDiscount();
+                comtype.getAllShoppingcarCount();
+                comtype.binding();
+                // comtype.getAllGoods();
+            },
+            getAllCommodityType() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllCommodityType",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        var html = template("showComType", data);
+                        document.getElementById("comTypeList").innerHTML = html;
+                    }
+                })
+            }, getAllDiscount() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllGoods",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        var html = template("showDiscount", data);
+                        document.getElementById("produce_commodity").innerHTML = html;
+                    }
+                })
+            }, getAllGoods() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllGoods",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        var d=data;
+                        var o=new Array();
+                        o.push(d);
+                        console.log(o);
+                        console.log(data)
+                        var html = template("showAllGoods", o);
+                        document.getElementById("produce_commodity").innerHTML = html;
+                    }
+                })
+            }, getAllShoppingcarCount() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllShoppingcarCount",
+                    data: "",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        $("#ShoppingcarCount").text(data.count);
+                    }
+                })
+            }, binding() {
+                $(".OnClickGoodsAll").click(function () {
+                    $(this).parent().children().removeClass("ClickGoodsAll");
+                    $(this).addClass("ClickGoodsAll");
+                    if ($(this).text() == "Discount") {
+                        comtype.getAllDiscount();
+                    } else if ($(this).text() == "AllGoods") {
+                        comtype.getAllGoods();
+                    }
+                })
+            }
+        }
+        comtype.init();
+    }());
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#poster',
+            width: '100%', //设置容器宽度
+            height: '400px',
+            arrow: 'hover' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<link rel="stylesheet" href="../../css/logon.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+	</head>
+
+	<body>
+		<div id="big">
+			<div id="header">
+				<div class="header_logo">Rouge</div>
+				<div class="header_title">LOGIN</div>
+			</div>
+			<hr width="90%" style="margin: auto;" />
+			<div id="body">
+				<div>
+					<h1>注册</h1>
+					<p>
+						<label>手机号</label><input type="text" placeholder="请输入手机号" /> 
+						<label class="right">电子邮件地址</label><input type="text"  placeholder="请输入电子邮件"  />
+					</p>
+					<p><label>验证码</label><input type="text"  placeholder="请输入验证码"  /><span id="verification"></span></p>
+					<p><label>短信验证码</label><input type="text"  placeholder="请输入短信验证码"/><button style="float: none;margin-left: 10px;">发送</button></p>
+					<p><label>性别</label>
+						<select>
+							<option>请选择性别</option>
+							<option>男</option>
+							<option>女</option>
+						</select> <label class="right">出生日期</label><input type="date" />
+					</p>
+
+					<p><label>密码</label><input type="password"  placeholder="请输入密码"  /></p>
+
+					<p><input type="checkbox" style="vertical-align: middle;" />我已阅读并接受个人信息采集声名</p>
+					<p id="msg"></p>
+					<p><button>注册</button></p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

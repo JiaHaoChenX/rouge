@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.ICommodityImgDao">
+    <select id="getAllCommodityimg" resultType="com.chenjiahao.rouge.entity.Commodityimg"
+            parameterType="com.chenjiahao.rouge.entity.Commodityimg">
+        SELECT
+        commodityimg.comiid,
+        commodityimg.comid,
+        commodityimg.imgpath
+        FROM
+        commodityimg
+        <where>
+            <if test="comid!=0">
+                and commodityimg.comid=#{comid}
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="addCommodityimg" parameterType="com.chenjiahao.rouge.entity.Commodityimg">
+        INSERT INTO `commodityImg` (comid, imgpath) VALUES
+            (#{comid}, #{imgpath})
+    </insert>
+
+    <delete id="delCommodityimg">
+        DELETE FROM commodityimg WHERE comiid in
+        <foreach collection="list" item="comiid" open="(" separator="," close=")">
+            #{comiid}
+        </foreach>
+    </delete>
+    <delete id="delComidCommodityimg">
+        DELETE FROM commodityimg WHERE comid=#{comiid}
+    </delete>
+</mapper>

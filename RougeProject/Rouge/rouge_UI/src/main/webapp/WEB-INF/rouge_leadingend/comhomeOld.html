@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rouge购物商城</title>
+    <link rel="stylesheet" href="../../css/index.css"/>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css"/>
+    <style>
+        #comTypeList > li {
+            transition-timing-function: ease-out;
+            transition-duration: 1s;
+        }
+
+        #comTypeList > li:hover {
+            border-bottom: 1px solid white;
+        }
+
+        #comTypeList > li:first-child:hover {
+            border-bottom: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            transition-timing-function: ease-out;
+            transition-duration: 1s;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+
+    </style>
+    <script src="../../js/jquery/jquery-1.11.3.js"></script>
+</head>
+
+<body>
+<div id="big">
+    <header id="header">
+        <div class="header_big">
+            <div class="header_big_left">
+                <ul style="margin-bottom: 10PX;" id="comTypeList"></ul>
+            </div>
+
+            <div class="header_big_right">
+                <ul>
+                    <li class="">
+                        <a href="/leadingend/secrecy/personal" class="header_big_right_ul_li_su">&#xF2C0;</a>
+                    </li>
+                    <li class="">
+                        <a href="/leadingend/secrecy/shoppingcar" class="header_big_right_ul_li_su">&#xF290;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!--搜索栏那块-->
+    <div id="grabble">
+        <div class="grabble_big">
+            <div class="grabble_big_left">
+                <div>R</div>
+            </div>
+            <div class="grabble_big_right">
+                <div class="grabble_big_right_input">
+                    <div class="grabble_big_right_input_tb">
+                        <input type="text" placeholder="请输入需要的商品" style="font-size: 12px;"/>
+                        <input type="button" class="grabble_big_right_input_tb_search" value="&#xe801;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <iframe src="commodity.html" id="iframe111"
+            style="width:950px; position: absolute; top:180px;left: 50%; transform: translate(-50%,0);border: none;scrolling : no  "></iframe>
+
+</div>
+<script type="text/javascript" src="../../js/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../js/layui/layui.js"></script>
+<script src="../../js/template/template-web.js"></script>
+<!--渲染导航栏的模板-->
+<script type="text/html" id="showComType">
+    <li class="header_big_left_ul_li_home" style="margin-bottom: 13px; text-align: right;"><a href="/leadingend/index">&#xe807;</a>
+    </li>
+    {{each data comtype index}}
+    {{if (index+1)%2==0}}
+    <li class="border_right comtype" data-comtid="{{comtype.comtid}}"><a>{{comtype.comtname}}</a></li>
+    {{else}}
+    <li class="comtype" data-comtid="{{comtype.comtid}}"><a>{{comtype.comtname}}</a></li>
+    {{/if}}
+
+    {{/each}}
+</script>
+<script type="text/javascript">
+
+    //渲染商品类型
+    (function () {
+        var comtype = {
+            init() {
+                comtype.getAllCommodityType()
+            },
+            getAllCommodityType() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllCommodityType",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        var html = template("showComType", data);
+                        document.getElementById("comTypeList").innerHTML = html;
+                    }
+                })
+            }
+        }
+        comtype.init();
+    }());
+
+    //渲染商品
+    (function () {
+        var goods = {
+            init() {
+                goods.binding();
+            }, binding() {
+                $("#comTypeList").on("click", ".comtype", function () {
+                    alert($(this).data("comtid"));
+                })
+            }
+
+        }
+        goods.init();
+    })();
+
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#poster',
+            width: '100%', //设置容器宽度s
+            height: '400px',
+            arrow: 'hover' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+    $("#iframe111").load(function () {
+        $("#iframe111").css("height", parseInt(document.getElementById('iframe111').contentWindow.document.getElementById('height111').innerText) + 100);
+    });
+
+</script>
+</body>
+
+</html>

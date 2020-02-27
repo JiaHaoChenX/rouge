@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.ICollectDao">
+    <insert id="addCollec" parameterType="com.chenjiahao.rouge.entity.Collect">
+        INSERT INTO `collect` (aid, comid) VALUES
+            (#{aid}, #{comid})
+    </insert>
+
+    <select id="getAllCollec" resultType="com.chenjiahao.rouge.entity.Collect">
+        SELECT *
+        FROM collect
+        <where>
+            <if test="aid!=null and aid!=''">
+                and aid=#{aid}
+            </if>
+            <if test="comid!=0 and comid!=null ">
+                and comid=#{comid}
+            </if>
+        </where>
+    </select>
+
+    <delete id="delCollec">
+        DELETE FROM collect
+        WHERE collectid in
+        <foreach collection="list" item="collectids" open="(" separator="," close=")">
+            #{collectids}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta name="viewport"
+  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>-->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../x-admin/css/font.css">
+    <link rel="stylesheet" href="../../x-admin/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="../../x-admin/js/xadmin.js"></script>
+    <!--<script src="../../x-admin/lib/layui/layui.js"></script>-->
+    <script src="../../js/template/template-web.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css" charset="utf-8">
+    <script src="../../js/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery/jquery-1.11.3.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-nav">
+			<span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so" id="userForm">
+            <input type="text" name="aid" placeholder="请输入用户账号" class="layui-input">
+            <input type="text" name="uname" placeholder="请输入用户姓名" class="layui-input">
+            <input type="radio" name="astatic" value="0" title="冻结">
+            <input type="radio" name="astatic" value="1" title="活跃">
+            <input type="radio" name="astatic" value="-1" title="全部" checked>
+            <select name="atid" lay-ignore style="display: inline-block; width: 200px;height: 38px"
+                    id="showSpanAtid"> </select>
+            <button type="button" class="layui-btn" id="selectUser"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+        <form action="/rouge/deriveemp" method="get">
+            <button type="submit" class="layui-btn">导出信息</button>
+        </form>
+    </div>
+    <xblock>
+        <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+        <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加-->
+        <!--</button>-->
+        <span class="x-right" style="line-height:40px"></span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
+                        class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>ID</th>
+            <th>登录名</th>
+            <th>姓名</th>
+            <th>手机</th>
+            <th>邮箱</th>
+            <th>身份证号码</th>
+            <th>头像</th>
+            <th>类型</th>
+            <th>状态</th>
+            <th>操作</th>
+        </thead>
+        <tbody id="tableUser"></tbody>
+    </table>
+    <div id="pageRougeUser">
+    </div>
+
+</div>
+<script>
+    (function ($) {
+        $.fn.serializeJson = function () {
+            var serializeObj = {};
+            $(this.serializeArray()).each(function () {
+                serializeObj[this.name] = this.value;
+            });
+            return serializeObj;
+        };
+        $('#btn').click(function () {
+            var data = $('#form').serializeJson();// 调用serializeJson方法获取表单内容
+            console.log(data);
+        })
+    })(jQuery);
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<!--渲染表格的模板-->
+<script type="text/html" id="showUser">
+    {{each data user index}}
+    <tr>
+        <td>
+            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{user.uid}}'><i
+                    class="layui-icon">&#xe605;</i>
+            </div>
+        </td>
+        <td>{{user.uid}}</td>
+        <td>{{user.aid}}</td>
+        <td>{{user.uname}}</td>
+        <td>{{user.uphone}}</td>
+        <td>{{user.umail}}</td>
+        <td>{{user.uidentityid}}</td>
+        <td><img src="../../x-admin/images/{{user.uportrait}}"></td>
+        <td>{{user.account.atname}}</td>
+        {{if user.account.astatic==0}}
+        <td>冻结</td>
+        {{else}}
+        <td>活跃</td>
+        {{/if}}
+        <td class="td-manage">
+
+            {{if user.account.astatic==0}}
+            <a data-aid={{user.aid}} class="blockUpId" href="javascript:;" title="启用">
+                <i class="layui-icon">&#xe62f;</i>
+            </a>
+            {{else}}
+            <a data-aid={{user.aid}} class="blockUpId" href="javascript:;" title="冻结">
+                <i class="layui-icon">&#xe601;</i>
+            </a>
+            {{/if}}
+            <a title="编辑" onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
+                <i class="layui-icon">&#xe642;</i>
+            </a>
+            <a title="删除" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/html" id="showAtid">
+    <option value="0">请选择用户类型</option>
+    {{each data accountType index}}
+    <option value="{{accountType.atid}}">{{accountType.atname}}</option>
+    {{/each}}
+</script>
+
+
+<script type="text/javascript">
+    (function () {
+        var com = {
+            userParams: {},
+            userCount: 0,
+            userCurr: 1,
+            init() {
+                com.getAllAccountType();
+                com.getUserCount({
+                    aid: "",
+                    atid: 0,
+                    uname: "",
+                    astatic: -1
+                });
+                com.binding();
+            },
+            getAllAccountType() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllAccountType",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        let html = template("showAtid", data);
+                        document.getElementById("showSpanAtid").innerHTML = html;
+                    }
+                })
+            },
+            getUserCount(userParams) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllUser",
+                    data: userParams,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        com.userCount = data.count;
+                        $(".x-right").html("总共有," + data.count + "个用户");
+                        com.showPage(userParams);
+                    }
+                })
+            },
+            showPage(userParams) {
+                layui.use('laypage', function () {
+                    var laypage = layui.laypage;
+                    //执行一个laypage实例
+                    laypage.render({
+                        elem: 'pageRougeUser' //注意，这里的 test1 是 ID，不用加 # 号
+                        ,
+                        count: com.userCount //数据总数，从服务端得到
+                        ,
+                        limit: 10,  //现实行数
+                        curr: com.userCurr, //当前所在哪页
+                        jump: function (obj, first) {
+                            com.userCurr = obj.curr;
+                            userParams.pageNo = ((obj.curr - 1) * obj.limit);//得到当前页，算出当前跳过的页数
+                            userParams.pageSize = obj.limit; //得到每页显示的条数
+                            com.userParams = userParams;
+                            com.getPageUesr(userParams);
+                        }
+                    })
+                })
+            }
+            ,
+            getPageUesr(userParams) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getPageUesr",
+                    data: userParams,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        var html = template("showUser", data);
+                        document.getElementById("tableUser").innerHTML = html;
+                    }
+                })
+            },
+            updateAccountAtid(account) {
+                console.log(account)
+                $.ajax({
+                    type: "POST",
+                    url: "/login/updateAccountAtid",
+                    data: account,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code > 0) {
+                            com.getUserCount(com.userParams);
+                            layer.msg('修改成功!', {icon: 1, time: 1000});
+                        } else {
+                            layer.msg('修改失败!', {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            },
+            binding() {
+                $("#selectUser").click(function () {
+                    let userParams = $("#userForm").serializeJson();
+                    com.getUserCount(userParams);
+                })
+
+                $(".layui-table").on("click", ".blockUpId", function () {
+                    let aid = this.getAttribute("data-aid");
+                    let title = this.getAttribute("title");
+                    if (title == "启用") {
+                        com.updateAccountAtid({
+                            aid: aid,
+                            astatic: 1
+                        }, this)
+                    } else if (title == "冻结") {
+                        com.updateAccountAtid({
+                            aid: aid,
+                            astatic: 0
+                        })
+                    }
+                })
+            }
+        }
+        com.init();
+    }());
+
+</script>
+</body>
+
+</html>

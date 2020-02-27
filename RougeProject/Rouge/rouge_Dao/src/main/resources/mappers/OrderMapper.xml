@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.IOrderDao">
+    <select id="getAllOrder" resultMap="getAllOrderMap" parameterType="com.chenjiahao.rouge.params.OrderParams">
+        SELECT
+        order.orderid orderid,
+        order.aid aid,
+        order.siteid siteid,
+        order.sitepurchase sitepurchase,
+        order.orderMoney orderMoney,
+        order.orderRemark orderRemark,
+        order.comstatic comstatic,
+        site.sitename sitename,
+        site.sitephone sitephone,
+        site.siteprovince siteprovince,
+        site.sitecity sitecity,
+        site.sitecounty sitecounty,
+        site.sitedetailed sitedetailed
+        FROM
+        `order`
+        INNER JOIN site ON order.siteid = site.siteid
+        <where>
+            <if test="orderid!=0">
+                and order.orderid=#{orderid}
+            </if>
+            <if test="comstatic!=-1">
+                and order.comstatic=#{comstatic}
+            </if>
+            <if test="sitename!=null and sitename!=''">
+                and site.sitename like concat(concat('%',#{sitename}),'%')
+            </if>
+            <if test="sitepurchaseMax!=null and sitepurchaseMax!=''">
+                and order.sitepurchase gt; #{sitepurchaseMax}
+            </if>
+            <if test="sitepurchaseMin!=null and sitepurchaseMin!=''">
+                and site.sitepurchase lt; #{sitepurchaseMin}
+            </if>
+            <if test="siteprovince!=null and siteprovince!=''">
+                and site.siteprovince like concat(concat('%',#{siteprovince}),'%')
+            </if>
+            <if test="sitecity!=null and sitecity!=''">
+                and site.sitecity like concat(concat('%',#{sitecity}),'%')
+            </if>
+            <if test="sitecounty!=null and sitecounty!=''">
+                and site.sitecounty like concat(concat('%',#{sitecounty}),'%')
+            </if>
+            <if test="sitedetailed!=null and sitedetailed!=''">
+                and site.sitedetailed like concat(concat('%',#{sitedetailed}),'%')
+            </if>
+        </where>
+    </select>
+    <resultMap id="getAllOrderMap" type="com.chenjiahao.rouge.entity.Order">
+        <id property="orderid" column="orderid"></id>
+        <result property="aid" column="aid"></result>
+        <result property="siteid" column="siteid"></result>
+        <result property="sitepurchase" column="sitepurchase"></result>
+        <result property="orderMoney" column="orderMoney"></result>
+        <result property="orderRemark" column="orderRemark"></result>
+        <result property="comstatic" column="comstatic"></result>
+        <association property="site" javaType="com.chenjiahao.rouge.entity.Site">
+            <id property="siteid" column="siteid"></id>
+            <result property="aid" column="aid"></result>
+            <result property="sitename" column="sitename"></result>
+            <result property="sitephone" column="sitephone"></result>
+            <result property="siteprovince" column="siteprovince"></result>
+            <result property="sitecity" column="sitecity"></result>
+            <result property="sitecounty" column="sitecounty"></result>
+            <result property="sitedetailed" column="sitedetailed"></result>
+        </association>
+    </resultMap>
+
+    <select id="getAllClientOrder" resultMap="getAllClientOrderMap"
+            parameterType="com.chenjiahao.rouge.entity.Order">
+        SELECT
+            order.orderid    orderid,
+            order.aid,
+            order.siteid,
+            order.sitepurchase,
+            order.orderMoney,
+            order.orderRemark,
+            order.comPending,
+            order.comstatic,
+            order.DeliverStatic,
+            order.ReceivablesStatic,
+            comreserve.crid,
+            comreserve.comid comid,
+            comreserve.crcount,
+            comreserve.comcolorid,
+            comreserve.comsizeid,
+            commodity.comname,
+            commodity.comtid,
+            commodity.comprice,
+            commodity.comproduce,
+            commodity.comstatic,
+            commodity.cominventory,
+            comdescribe.comdescribeid,
+            comdescribe.img,
+            comdescribe.video,
+            comdescribe.proposal,
+            comdescribe.formula,
+            comdescribe.diyparam
+        FROM
+            `order`
+            INNER JOIN comreserve ON order.orderid = comreserve.orderid
+            INNER JOIN commodity ON comreserve.comid = commodity.comid
+            INNER JOIN comdescribe ON commodity.comid = comdescribe.comid
+        WHERE
+            order.ReceivablesStatic = #{receivablesStatic} AND order.comstatic = #{comstatic} AND
+            order.DeliverStatic = #{deliverStatic}
+            AND order.comPending = #{comPending} AND order.aid = #{aid} ORDER BY order.sitepurchase DESC
+    </select>
+    <resultMap id="getAllClientOrderMap" type="com.chenjiahao.rouge.entity.Order">
+        <id property="orderid" column="orderid"></id>
+        <result property="aid" column="aid"></result>
+        <result property="siteid" column="siteid"></result>
+        <result property="sitepurchase" column="sitepurchase"></result>
+        <result property="orderMoney" column="orderMoney"></result>
+        <result property="orderRemark" column="orderRemark"></result>
+        <result property="comPending" column="comPending"></result>
+        <result property="comstatic" column="comstatic"></result>
+        <result property="deliverStatic" column="DeliverStatic"></result>
+        <result property="receivablesStatic" column="ReceivablesStatic"></result>
+
+        <collection property="comdescribe" ofType="com.chenjiahao.rouge.entity.Comdescribe">
+            <id property="comdescribeid" column="comdescribeid"></id>
+            <result property="img" column="img"></result>
+            <result property="comid" column="comid"></result>
+            <result property="video" column="video"></result>
+            <result property="proposal" column="proposal"></result>
+            <result property="formula" column="formula"></result>
+            <result property="diyparam" column="diyparam"></result>
+        </collection>
+        <collection property="comreserves" ofType="com.chenjiahao.rouge.entity.Comreserve">
+            <id property="crid" column="crid"></id>
+            <result property="orderid" column="orderid"></result>
+            <result property="comid" column="comid"></result>
+            <result property="crcount" column="crcount"></result>
+            <result property="comcolorid" column="comcolorid"></result>
+            <result property="comsizeid" column="comsizeid"></result>
+        </collection>
+        <collection property="commodity" ofType="com.chenjiahao.rouge.entity.Commodity">
+            <id property="comid" column="comid"></id>
+            <result property="comname" column="comname"></result>
+            <result property="comtid" column="comtid"></result>
+            <result property="comprice" column="comprice"></result>
+            <result property="comproduce" column="comproduce"></result>
+            <result property="comstatic" column="comstatic"></result>
+            <result property="cominventory" column="cominventory"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getOrderByDate" resultMap="getOrderByDateMap">
+        SELECT
+        order.orderid,
+        order.aid,
+        order.siteid,
+        order.sitepurchase,
+        order.orderMoney,
+        order.orderRemark,
+        order.comPending,
+        order.comstatic,
+        order.DeliverStatic,
+        order.ReceivablesStatic,
+        comreserve.crid,
+        comreserve.comid,
+        comreserve.crcount,
+        comreserve.comcolorid,
+        comreserve.comsizeid
+        FROM
+        `order`
+        INNER JOIN comreserve ON order.orderid = comreserve.orderid WHERE
+        order.ReceivablesStatic=1 AND order.sitepurchase &lt;=DATE_FORMAT(#{date},'%Y-%m-%d  23:59:59') and
+        order.sitepurchase>=DATE_FORMAT(#{date},'%Y-%m-%d 00:00:00')
+    </select>
+    <resultMap id="getOrderByDateMap" type="com.chenjiahao.rouge.entity.Order">
+        <id property="orderid" column="orderid"></id>
+        <result property="aid" column="aid"></result>
+        <result property="siteid" column="siteid"></result>
+        <result property="sitepurchase" column="sitepurchase"></result>
+        <result property="orderMoney" column="orderMoney"></result>
+        <result property="orderRemark" column="orderRemark"></result>
+        <result property="comPending" column="comPending"></result>
+        <result property="comstatic" column="comstatic"></result>
+        <result property="deliverStatic" column="DeliverStatic"></result>
+        <result property="receivablesStatic" column="ReceivablesStatic"></result>
+
+        <collection property="comdescribe" ofType="com.chenjiahao.rouge.entity.Comdescribe">
+            <id property="comdescribeid" column="comdescribeid"></id>
+            <result property="img" column="img"></result>
+            <result property="comid" column="comid"></result>
+            <result property="video" column="video"></result>
+            <result property="proposal" column="proposal"></result>
+            <result property="formula" column="formula"></result>
+            <result property="diyparam" column="diyparam"></result>
+        </collection>
+    </resultMap>
+
+
+    <!--添加后返回主键-->
+    <!--#         useGeneratedKeys：必须设置为true，否则无法获取到主键id。-->
+    <!--#         keyProperty：设置为POJO对象的主键id属性名称。-->
+    <!--#         keyColumn：设置为数据库记录的主键id字段名称。-->
+    <insert id="addOrder" useGeneratedKeys="true" keyProperty="orderid"
+            parameterType="com.chenjiahao.rouge.entity.Order">
+        INSERT INTO `order` (aid, siteid, sitepurchase, orderMoney, orderRemark, comPending, comstatic, DeliverStatic, ReceivablesStatic)
+        VALUES
+            (#{aid}, #{siteid}, default, #{orderMoney}, #{orderRemark}, default, default, default, default);
+    </insert>
+    <update id="updateOrder" parameterType="com.chenjiahao.rouge.entity.Order">
+        UPDATE `order`
+        SET siteid    = #{siteid}, sitepurchase = DEFAULT, orderMoney = #{orderMoney}, orderRemark = #{orderRemark},
+            comstatic = 0
+        WHERE orderid = #{orderid}
+    </update>
+    <!--下单修改-->
+    <update id="operation_ok" parameterType="com.chenjiahao.rouge.entity.Order">
+        UPDATE `order`
+        SET siteid = #{siteid}, orderRemark = #{orderRemark}, comstatic = #{comstatic}
+        WHERE orderid = #{orderid}
+    </update>
+
+    <!--客户订单管理-->
+    <update id="updateCustomerOrder" parameterType="com.chenjiahao.rouge.entity.Order">
+        UPDATE `order`
+        SET comPending        = #{comPending}, comstatic = #{comstatic}, DeliverStatic = #{deliverStatic},
+            ReceivablesStatic = #{receivablesStatic}
+        WHERE orderid = #{orderid};
+
+    </update>
+
+    <select id="getPageOrder" resultMap="getPageOrderMap" parameterType="com.chenjiahao.rouge.params.OrderParams">
+        SELECT
+        order.orderid orderid,
+        order.aid aid,
+        order.siteid siteid,
+        order.sitepurchase sitepurchase,
+        order.orderMoney orderMoney,
+        order.orderRemark orderRemark,
+        order.comstatic comstatic,
+        site.sitename sitename,
+        site.sitephone sitephone,
+        site.siteprovince siteprovince,
+        site.sitecity sitecity,
+        site.sitecounty sitecounty,
+        site.sitedetailed sitedetailed
+        FROM
+        `order`
+        INNER JOIN site ON order.siteid = site.siteid
+        <where>
+            <if test="orderid!=0">
+                and order.orderid=#{orderid}
+            </if>
+            <if test="comstatic!=-1">
+                and order.comstatic=#{comstatic}
+            </if>
+            <if test="sitename!=null and sitename!=''">
+                and site.sitename like concat(concat('%',#{sitename}),'%')
+            </if>
+            <if test="sitepurchaseMax!=null and sitepurchaseMax!=''">
+                and order.sitepurchase gt; #{sitepurchaseMax}
+            </if>
+            <if test="sitepurchaseMin!=null and sitepurchaseMin!=''">
+                and site.sitepurchase lt; #{sitepurchaseMin}
+            </if>
+            <if test="siteprovince!=null and siteprovince!=''">
+                and site.siteprovince like concat(concat('%',#{siteprovince}),'%')
+            </if>
+            <if test="sitecity!=null and sitecity!=''">
+                and site.sitecity like concat(concat('%',#{sitecity}),'%')
+            </if>
+            <if test="sitecounty!=null and sitecounty!=''">
+                and site.sitecounty like concat(concat('%',#{sitecounty}),'%')
+            </if>
+            <if test="sitedetailed!=null and sitedetailed!=''">
+                and site.sitedetailed like concat(concat('%',#{sitedetailed}),'%')
+            </if>
+        </where>
+        LIMIT #{pageNo},#{pageSize}
+    </select>
+    <resultMap id="getPageOrderMap" type="com.chenjiahao.rouge.entity.Order">
+        <id property="orderid" column="orderid"></id>
+        <result property="aid" column="aid"></result>
+        <result property="siteid" column="siteid"></result>
+        <result property="sitepurchase" column="sitepurchase"></result>
+        <result property="orderMoney" column="orderMoney"></result>
+        <result property="orderRemark" column="orderRemark"></result>
+        <result property="comstatic" column="comstatic"></result>
+        <association property="site" javaType="com.chenjiahao.rouge.entity.Site">
+            <id property="siteid" column="siteid"></id>
+            <result property="aid" column="aid"></result>
+            <result property="sitename" column="sitename"></result>
+            <result property="sitephone" column="sitephone"></result>
+            <result property="siteprovince" column="siteprovince"></result>
+            <result property="sitecity" column="sitecity"></result>
+            <result property="sitecounty" column="sitecounty"></result>
+            <result property="sitedetailed" column="sitedetailed"></result>
+        </association>
+    </resultMap>
+</mapper>

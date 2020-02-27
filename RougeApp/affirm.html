@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<title>确认订单</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js" ></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<style type="text/css">
+			*{
+				margin: 0; padding: 0;
+			}
+			ul{
+				list-style: none;
+			}
+			.affirm-con{
+				padding: 50px 5px 50px 5px;
+			}
+			.affirm-address-table1,.affirm-white-table1{
+				width: 100%;				
+			}
+			.affirm-address{
+				color: #333333;
+				font-size: 14px;
+			}
+			.affirm-address-span1{
+				font-size: 16px;
+			}
+			.affirm-address-span2{
+				font-size: 16px;
+				float: right;
+			}
+			.affirm-address-span3{
+				font-size: 13px;
+				color: #FF8800;
+			}
+			.affirm-white{
+				background-color: white;
+				border-radius: 5px;
+				margin-top: 10px;
+				padding: 5px;
+			}
+			.affirm-white-img1{
+				width: 65px;
+				overflow: hidden;
+			}
+			.affirm-white-table1{
+				font-size: 14px;
+				background-color: #F1F1F1;
+				border-radius: 5px;
+			}
+			.affirm-white-td1{
+				width: 70%;
+    			padding: 0 5px;
+    			
+			}
+			.affirm-address-span4{
+				color: #C0C0C3;
+			}
+			.affirm-address-span5{
+				float: right;
+			}
+			.affirm-address-ul1{
+				margin-top:10px ;
+			}
+			.affirm-address-ul1>li{
+				height: 45px;
+				line-height: 45px;
+				border-bottom: 1px solid #DDDDDD;
+				font-size: 15px;
+				color: #555555;
+			}
+			.affirm-address-span6{
+				color: #FF0000;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--全部的开始-->
+		<div>
+			<!--头部-->
+			<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
+				<a href="main.html">
+					 <span class="mui-icon mui-icon-back"  ></span>
+				</a>				 
+				<h1 class="mui-title">
+				 	<span>确认订单</span>
+				</h1>			
+			</header>
+			<!--中间的全部开始-->
+			<div class="affirm-con">
+			
+				<!--上面的地址开始-->
+				<a  href="address.html">
+				<div class="affirm-address">					
+						<table class="affirm-address-table1">
+							<tr>
+								<td rowspan="3">
+									<span class="mui-icon mui-icon-map"></span>
+								</td>
+								<td style="width: 80%;">
+									<span class="affirm-address-span1">收货人：小超人</span>
+									<span class="affirm-address-span2"> 13432545546</span>
+								</td>
+								<td rowspan="3">
+									<span class="mui-icon mui-icon-arrowright"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span>收货地址：广东省珠海市斗门区白蕉镇白蕉南路29号【南方IT学院】</span>
+								</td>								
+							</tr>
+							<tr>
+								<td>
+									<span class="affirm-address-span3">收货不便时，可选择免费代收货服务</span>
+								</td>								
+							</tr>
+						</table>
+						
+				<!--上面的地址结束-->
+				</div>
+				</a>
+				
+				<!--白色部分开始-->
+				<div class="affirm-white">
+					<h4>rouge</h4>
+					<!--要购买的商品开始-->
+					<div>
+						<table class="affirm-white-table1">
+							<tr>
+								<td>								
+									<img class="affirm-white-img1" src="img/xq/xq_1.jpg" />
+								</td>
+								<td class="affirm-white-td1">
+									<span >rouge小黑盒气垫</span><br />
+									<span class="affirm-address-span3">此商品性质不支持七天退货</span>
+								</td>
+								<td>
+									<span>299.00</span><br />
+									<span class="affirm-address-span4">x1</span>
+								</td>
+							</tr>
+						</table>
+						<ul class="affirm-address-ul1">
+							<li>
+								<span>配送方式</span>
+								<span class="affirm-address-span5">快递 免邮<span class="mui-icon mui-icon-arrowright"></span></span>
+							</li>
+							<li>
+								<span>运费险</span>
+								<span class="affirm-address-span5"><span class="mui-icon mui-icon-arrowright"></span></span>
+							</li>
+							<li>
+								<span>开具发票</span>
+								<span class="affirm-address-span5"><input type="checkbox" /></span>
+							</li>
+							<li>
+								买家留言：
+								<span class="affirm-address-span7">
+									<input type="text"  placeholder="选填：填写的内容已和卖家协商确认" style="width: 75%; font-size: 14px;"/>
+								</span>
+							</li>
+							<p>
+								<span class="affirm-address-span5">
+									共1件商品   小计：<span class="affirm-address-span6">￥299.00</span>
+								</span>
+							</p>
+						</ul>
+					<!--要购买的商品结束-->
+					</div>
+				<!--白色部分结束-->	
+				</div>
+			<!--中间的全部结束-->	
+			</div>
+		<!--全部的结束-->
+		</div>
+	</body>
+</html>

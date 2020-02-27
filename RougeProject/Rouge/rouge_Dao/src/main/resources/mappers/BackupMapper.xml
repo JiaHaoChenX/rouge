@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.IBackupDao">
+
+    <select id="getAllBackup" parameterType="com.chenjiahao.rouge.entity.Backup"
+            resultType="com.chenjiahao.rouge.entity.Backup">
+        select * from backup
+        <where>
+            <if test="refundTimeMin!=null and refundTimeMin!=''">
+                and refundTime gt; #{refundTimeMin}
+            </if>
+            <if test="refundTimeMax!=null and refundTimeMax!=''">
+                and refundTime lt; #{refundTimeMin}
+            </if>
+        </where>
+    </select>
+
+    <select id="getPageBackup" parameterType="com.chenjiahao.rouge.entity.Backup"
+            resultType="com.chenjiahao.rouge.entity.Backup">
+        select * from backup
+        <where>
+            <if test="refundTimeMin!=null and refundTimeMin!=''">
+                and refundTime gt; #{refundTimeMin}
+            </if>
+            <if test="refundTimeMax!=null and refundTimeMax!=''">
+                and refundTime lt; #{refundTimeMin}
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+
+    <insert id="addBackup" parameterType="com.chenjiahao.rouge.entity.Backup">
+        INSERT INTO backup (backupidname, refundTime, Remarks) VALUES (#{backupidname}, default, #{remarks});
+    </insert>
+
+</mapper>

@@ -1,0 +1,35 @@
+{
+	"main.html": {
+		"refer": [
+			"setting.html",
+			"myOrder.html",
+			"search.html",
+			"commdityDateils.html"
+		],
+		"resources": [
+			"img/生活－大众点评 (1).png",
+			"img/折扣卡.png",
+			"img/全部 (1).png"
+		]
+	},
+	"login.html": {
+		"refer": [
+			"main.html"
+		]
+	},
+	"myOrder.html": {
+		"refer": [
+			"main.html"
+		]
+	},
+	"search.html": {
+		"refer": [
+			"main.html"
+		]
+	},
+	"commdityDateils.html": {
+		"refer": [
+			"main.html"
+		]
+	}
+}

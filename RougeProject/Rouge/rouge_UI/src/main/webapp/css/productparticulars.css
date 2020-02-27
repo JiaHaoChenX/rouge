@@ -1,0 +1,222 @@
+@charset "UTF-8";
+#main {
+  width: 950px;
+  margin: auto;
+  font-size: 0;
+  position: relative;
+  margin-top: 40px; }
+
+.main_img {
+  width: 60%;
+  float: left; }
+
+.main_img > ul > li {
+  width: 48%;
+  margin: 1%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.main_img > ul > li:first-child {
+  width: 100%;
+  margin: 0;
+  height: 580px; }
+
+.main_particulars {
+  font-size: 20px;
+  width: 285px;
+  float: right;
+  margin-right: 0;
+  right: 0;
+  height: 580px;
+  background-color: white; }
+
+.main_particulars_title {
+  text-indent: 20px;
+  height: 100px;
+  border-bottom: 2px solid #e0e0e0; }
+
+.main_particulars_title > div {
+  margin-bottom: 5px;
+  vertical-align: middle; }
+
+.main_particulars_title_tag {
+  font-size: 14px;
+  color: #9A9A9A;
+  height: 20px;
+  line-height: 20px; }
+
+.main_particulars_title_name {
+  font-size: 20px;
+  height: 25px;
+  line-height: 25px; }
+
+.main_particulars_title_type {
+  font-size: 14px;
+  color: #585858; }
+
+.main_particulars_type {
+  margin-top: 20px; }
+
+.main_particulars_type_color, .main_particulars_type_size {
+  display: flex;
+  /*定义为弹性盒子*/
+  flex-direction: row;
+  /*设置排列方式*/
+  justify-content: space-between;
+  /*设置对齐方式*/
+  flex-wrap: wrap;
+  /*设置溢出是否换行*/ }
+
+.main_particulars_type_color > div {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 2px; }
+
+.main_particulars_type_size > div {
+  width: 60px;
+  height: 30px;
+  margin-top: 10px;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  background-color: black;
+  color: white; }
+
+.main_particulars_compare {
+  width: 150px;
+  height: 40px;
+  margin: auto;
+  border-radius: 75px;
+  margin-top: 30px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  margin-bottom: 20px; }
+
+.main_particulars_compare:hover {
+  color: white;
+  background: black; }
+
+.main_particulars_select {
+  width: 285px;
+  background: #FFFFFF; }
+
+.main_particulars_select_modulebig:hover ~ .main_particulars_select_module {
+  display: block; }
+
+.main_particulars_select_modulebig {
+  height: 60px;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative; }
+
+.main_particulars_select_module {
+  height: 60px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+  display: none; }
+
+.main_particulars_select_modulebig > div,
+.main_particulars_select_module > div {
+  height: 30px;
+  width: 270px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  line-height: 30px; }
+
+.main_particulars_select_modulebig > div > div,
+.main_particulars_select_module > div > div {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 50%;
+  float: left; }
+
+.main_particulars_select_modulebig > div > span,
+.main_particulars_select_module > div > span {
+  display: inline-block;
+  float: left;
+  margin-left: 10px; }
+
+.main_particulars_select_modulebig > div > span:last-child {
+  display: inline-block;
+  float: right; }
+
+.main_particulars_actions {
+  width: 285px;
+  margin-top: 30px; }
+
+.main_particulars_actions > div > div:first-child {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  border-radius: 25px;
+  background: #020202;
+  float: left; }
+
+.main_particulars_actions > div > div:last-child {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #020202;
+  float: right; }
+
+.main_particulars_actions_div_div_aixin {
+  font-family: "fontello";
+  font-size: 30px;
+  color: #A8A8A8;
+  font-style: normal; }
+
+.main_particulars_actions > div:last-child {
+  height: 50px;
+  border: 1px solid black;
+  margin-top: 10px;
+  border-radius: 25px;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center; }
+
+#introduce {
+  width: 950px;
+  margin: 100px auto; }
+
+#introduce > div:first-child {
+  /*定义为弹性盒子*/
+  display: flex;
+  /*设置排列方式*/
+  flex-direction: row;
+  /*设置对齐方式*/
+  justify-content: space-between;
+  border-bottom: 2px solid #e0e0e0; }
+
+#introduce > div:first-child > div {
+  padding: 10px;
+  text-align: center; }
+
+.introduce_div_first-child_div_first-child {
+  border-bottom: 2px solid black; }
+
+#introduce > div:first-child > div:hover {
+  border-bottom: 2px solid black; }
+
+#introduce > div:last-child {
+  padding: 40px;
+  border-bottom: 2px solid #e0e0e0; }
+
+/*# sourceMappingURL=productparticulars.css.map */

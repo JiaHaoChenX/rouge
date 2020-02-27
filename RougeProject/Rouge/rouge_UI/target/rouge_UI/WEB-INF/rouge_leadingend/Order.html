@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body,
+        html {
+            overflow: visible;
+        }
+
+        #personal {
+            width: 620px;
+            margin: 20px auto;
+        }
+
+        #operation {
+            display: flex; /*定义为弹性盒子*/
+            flex-direction: row; /*设置排列方式*/
+            justify-content: space-between; /*设置水平对齐方式*/
+            align-items: flex-start; /*设置改行垂直对齐方式*/
+        }
+
+        #operation > div {
+            color: white;
+            background: black;
+            font-size: 13px;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        #operation > div:hover {
+            color: red;
+        }
+
+        #operation > .operation_ok {
+            color: red;
+        }
+
+        #order > .order_goods {
+            width: 100%;
+            margin-top: 20px
+        }
+
+        .order_goods_head {
+            height: 40px;
+            background: black;
+            position: relative;
+            text-indent: 20px
+        }
+
+        .order_goods_head > div {
+            font-size: 12px;
+            line-height: 20px;
+            width: 600px;
+            height: 20px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            color: white;
+            transform: translate(-50%, -50%);
+        }
+
+        .order_goods_commodity {
+            border: 1px solid black;
+            height: 160px
+        }
+
+        .order_goods_commodity_img, .order_goods_commodity_img_money, .order_goods_commodity_img_count {
+            width: 40%;
+            height: 160px;
+            display: inline-block;
+        }
+
+        .order_goods_commodity_img_money, .order_goods_commodity_img_count {
+            width: 28%;
+            text-align: center;
+            line-height: 160px;
+        }
+
+        .order_goods_commodity_img_img {
+            width: 130px;
+            height: 160px;
+            float: left;
+        }
+
+        .order_goods_commodity_img_details {
+            width: 100px;
+            height: 160px;
+            /*text-indent: 10px;*/
+            float: right;
+            text-align: center;
+            line-height: 160px;
+        }
+
+        .order_goods_commodity_img_details > p {
+            margin-top: 20px
+        }
+
+    </style>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css">
+</head>
+<body>
+<input hidden id="height">
+<div id="personal">
+    <div id="operation">
+        <div class="operation_ok"
+             data-order='{"receivablesStatic": 1,"comstatic": 1,"deliverStatic": 1,"comPending": 1}'>全部订单
+        </div>
+        <div data-order='{"receivablesStatic": 0,"comstatic": 0,"deliverStatic": 0,"comPending": 1}'>待付款</div>
+        <div data-order='{"receivablesStatic": 0,"comstatic": 1,"deliverStatic": 0,"comPending": 1}'>待收货</div>
+        <div data-order='{"receivablesStatic": 1,"comstatic": 1,"deliverStatic": 1,"comPending": 1}'>待评论</div>
+    </div>
+    <div id="order">
+        <div>
+            <!--<div class="order_goods">-->
+            <!--<div class="order_goods_head">-->
+            <!--<div>-->
+            <!--<input type="checkbox" style="vertical-align: middle;">-->
+            <!--<span>时间：2019-1-20 </span>-->
+            <!--<span>订单编号：100000000100 </span>-->
+            <!--<span style="color: red;">总价：1000 </span>-->
+            <!--<div style="float: right;">-->
+            <!--<button class="layui-btn  layui-btn-xs">收货</button>-->
+            <!--<button class="layui-btn layui-btn-normal layui-btn-xs">退款</button>-->
+            <!--<button class="layui-btn layui-btn-normal layui-btn-xs">评论</button>-->
+            <!--<button class="layui-btn layui-btn-normal layui-btn-xs">下单</button>-->
+            <!--<button class="layui-btn layui-btn-danger layui-btn-xs">删除</button>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<div class="order_goods_commodity">-->
+            <!--<div class="order_goods_commodity_img">-->
+            <!--<div class="order_goods_commodity_img_img">-->
+            <!--<img width="130px" height="160px" src="../../img/r/r2.png">-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity_img_details">-->
+            <!--<p>便携运动布套杯防摔水杯子卡通杯套防烫</p>-->
+            <!--<p>10G</p>-->
+            <!--<p>10G</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity_img_money">￥300</div>-->
+            <!--<div class="order_goods_commodity_img_count">3</div>-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity">-->
+            <!--<div class="order_goods_commodity_img">-->
+            <!--<div class="order_goods_commodity_img_img">-->
+            <!--<img width="130px" height="160px" src="../../img/r/r2.png">-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity_img_details">-->
+            <!--<p>便携运动布套杯防摔水杯子卡通杯套防烫</p>-->
+            <!--<p>10G</p>-->
+            <!--<p>10G</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity_img_money">￥300</div>-->
+            <!--<div class="order_goods_commodity_img_count">3</div>-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity">-->
+            <!--<div class="order_goods_commodity_img">-->
+            <!--<div class="order_goods_commodity_img_img">-->
+            <!--<img width="130px" height="160px" src="../../img/r/r2.png">-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity_img_details">-->
+            <!--<p>便携运动布套杯防摔水杯子卡通杯套防烫</p>-->
+            <!--<p>10G</p>-->
+            <!--<p>10G</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="order_goods_commodity_img_money">￥300</div>-->
+            <!--<div class="order_goods_commodity_img_count">3</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+</div>
+<script src="../../js/jquery/jquery-1.11.3.js"></script>
+<script src="../../js/template/template-web.js"></script>
+<script src="../../js/jquery/jquery-1.11.3.js"></script>
+
+
+<!--渲染Order的模板-->
+<script type="text/html" id="showOrder">
+    {{each data order index}}
+    <div class="order_goods">
+        <div class="order_goods_head">
+            <div>
+                <input type="checkbox" style="vertical-align: middle;">
+                <span>时间：{{order.sitepurchase}} </span>
+                <span>订单编号：100000000<span>{{order.orderid}}</span> </span>
+                <span style="color: red;">总价：<span>{{order.orderMoney}}</span>￥ </span>
+                <div style="float: right;">
+                    {{if order.receivablesStatic==1 && order.comstatic==1 && order.deliverStatic==1 &&
+                    order.comPending==1}}
+                    <button class="layui-btn layui-btn-normal layui-btn-xs ">退款</button>
+                    <button class="layui-btn layui-btn-xs ">评论</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-xs ">删除</button>
+                    {{/if}}
+                    {{if order.receivablesStatic==0 && order.comstatic==0 && order.deliverStatic==0 &&
+                    order.comPending==1}}
+                    <button class="layui-btn layui-btn-normal layui-btn-xs order_payment"
+                            data-orderid="{{order.orderid}}">付款
+                    </button>
+                    <button class="layui-btn layui-btn-warm layui-btn-xs order_again" data-orderid="{{order.orderid}}">
+                        重购
+                    </button>
+                    <button class="layui-btn layui-btn-danger layui-btn-xs ">取消</button>
+                    {{/if}}
+                    {{if order.receivablesStatic==0 && order.comstatic==1 && order.deliverStatic==0 &&
+                    order.comPending==1}}
+                    <button class="layui-btn layui-btn-normal layui-btn-xs order_receiving"
+                            data-orderid="{{order.orderid}}">收货
+                    </button>
+                    <button class="layui-btn layui-btn-danger layui-btn-xs ">退款</button>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div>
+            {{each order.comdescribe goods index_goods}}
+            <div class="order_goods_commodity">
+                <div class="order_goods_commodity_img">
+                    <div class="order_goods_commodity_img_img">
+                        <img width="130px" height="160px" src="{{goods.img}}">
+                    </div>
+                    <div class="order_goods_commodity_img_details">
+                        {{order.commodity[index_goods].comname}}
+                    </div>
+                </div>
+                <div class="order_goods_commodity_img_money">￥<span>{{order.commodity[index_goods].comprice}}</span>
+                </div>
+                <div class="order_goods_commodity_img_count">{{order.comreserves[index_goods].crcount}}</div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/each}}
+</script>
+<script>
+    var order = {
+        init() {
+            order.getAllClientOrder({
+                "receivablesStatic": 1,
+                "comstatic": 1,
+                "deliverStatic": 1,
+                "comPending": 1,
+            });
+            order.binding();
+        }
+        , getAllClientOrder(order) {
+            $.ajax({
+                type: "POST",
+                url: "/rouge/secrecy/getAllClientOrder",
+                data: order,
+                //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                // contentType: "application/json;charset=UTF-8",
+                dataType: "json", //预期服务器返回的数据类型
+                success: function (data) {
+                    console.log(data);
+                    var html = template("showOrder", data);
+                    document.getElementById("order").innerHTML = html;
+                    $("#height").val($("#personal").height());
+                }
+            })
+        }
+        , updateCustomerOrder(order) {
+            $.ajax({
+                type: "POST",
+                url: "/rouge/secrecy/updateCustomerOrder",
+                data: order,
+                //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                // contentType: "application/json;charset=UTF-8",
+                dataType: "json", //预期服务器返回的数据类型
+                success: function (data) {
+                    console.log(data);
+                    if (data.code > 0) {
+                        alert("成功!!");
+                        order.getAllClientOrder({
+                            "receivablesStatic": 1,
+                            "comstatic": 1,
+                            "deliverStatic": 1,
+                            "comPending": 1,
+                        });
+                    }
+                }
+            })
+        }
+        , getGoodsByOrderid(orderid) {
+            $.ajax({
+                type: "POST",
+                url: "/rouge/secrecy/getGoodsByOrderid?orderid=" + orderid + "",
+                data: "",
+                //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                // contentType: "application/json;charset=UTF-8",
+                dataType: "json", //预期服务器返回的数据类型
+                success: function (data) {
+                    console.log(data);
+                    if (data.code > 0) {
+                        alert("成功!!");
+                        order.getAllClientOrder({
+                            "receivablesStatic": 1,
+                            "comstatic": 1,
+                            "deliverStatic": 1,
+                            "comPending": 1,
+                        });
+                    }
+                }
+            })
+        }
+        , binding() {
+            $("#operation>div").click(function () {
+                $("#operation>div").removeClass("operation_ok");
+                $(this).addClass("operation_ok");
+                order.getAllClientOrder($(this).data("order"));
+            });
+
+            $("#order").on("click", ".order_payment", function () {
+                order.updateCustomerOrder({
+                    "receivablesStatic": 0,
+                    "comstatic": 1,
+                    "deliverStatic": 0,
+                    "comPending": 1,
+                    "orderid": $(this).data("orderid")
+                });
+            });
+            $("#order").on("click", ".order_receiving", function () {
+                order.updateCustomerOrder({
+                    "receivablesStatic": 1,
+                    "comstatic": 1,
+                    "deliverStatic": 1,
+                    "comPending": 1,
+                    "orderid": $(this).data("orderid")
+                });
+            });
+
+            $("#order").on("click", ".order_again", function () {
+                order.getGoodsByOrderid($(this).data("orderid"));
+            })
+        }
+    };
+    order.init();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="js/layui/css/layui.css" />
+	</head>
+	<body>
+		<!--海报那块-->
+			<div id="poster" class="layui-carousel">
+				<div carousel-item>
+					<div style="background-image: url(img/hb/hb1.jpg);"></div>
+					<div style="background-image: url(img/hb/hb2.jpg);"></div>
+					<div style="background-image: url(img/hb/hb3.jpg);"></div>
+				</div>
+			</div>
+			
+			<!--官方限时礼遇那块-->
+			<div id="present" >
+				<h2>官方限时礼遇</h2>
+				<div>
+					<div>
+						<h1>限时认购包邮,+限量欢迎礼</h1>
+						<h1>任意2件加享，旅游化妆包化妆包</h1>
+						<div>立即了解详情 </div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="product">
+				<h2 class="product_title">人气必BUY</h2>
+				<div class="product_classify">
+					<div>唇部热卖</div>
+					<div>眼部热卖</div>
+					<div>底妆热卖</div>
+				</div>
+				<div class="produce_commodity">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+			
+		</div>
+		<script type="text/javascript" src="js/jquery/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/layui/layui.js"></script>
+		<script type="text/javascript">
+			layui.use('carousel', function() {
+				var carousel = layui.carousel;
+				//建造实例
+				carousel.render({
+					elem: '#poster',
+					width: '100%', //设置容器宽度 	 
+					height:'400px',
+					arrow: 'hover' //始终显示箭头
+					//,anim: 'updown' //切换动画方式
+				});
+			});
+		</script>
+	</body>
+</html>

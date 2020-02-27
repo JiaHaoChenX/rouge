@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" type="text/css" href="../../css/shoppingcar.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css">
+
+</head>
+
+<body>
+<div id="big">
+    <input hidden id="height">
+    <input hidden id="width">
+    <div id="shopping">
+        <table id="commodity">
+            <tr class="tr">
+                <th width="40px">
+                    <input type="checkbox" class="layui-form-checkbox">
+                </th>
+                <th>产品</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>总计</th>
+            </tr>
+            <tr is="car-item" v-for="(obj,index) in shoppingcar" v-bind:shopping="obj"></tr>
+
+
+        </table>
+        <div id="menu">
+            <div>请挑选体验装</div>
+            <div>我的收藏</div>
+            <div>购买历史</div>
+        </div>
+        <div id="payment">
+            <h2>您的订单小计</h2>
+            <div>
+                <div class="payment_left">小计</div>
+                <div class="payment_right">￥{{getPriceCount()}}</div>
+            </div>
+            <div>
+                <div class="payment_left">运费及处理费</div>
+                <div class="payment_right">￥0</div>
+            </div>
+            <hr/>
+            <div>
+                <div class="payment_left">预计总额</div>
+                <div class="payment_right">￥<span id='orderMoney'>{{getPriceCount()}}</span></div>
+            </div>
+            <div class="payment_order" id="payment_order"><a>继续结账</a></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../../js/jquery/jquery-1.11.3.js"></script>
+<script src="../../js/vue/vue.js"></script>
+<script src="../../js/layer/layer.js"></script>
+<script src="../../js/layui/layui.js"></script>
+<script>
+    var orderId = new Array();
+    (function () {
+        //在vue中添加一个名为todo-item组件
+        Vue.component("car-item", {
+            props: ['shopping'],
+            //定义模板
+            template: "  <tr>" +
+            "                <td>" +
+            "                    <input checked    v-bind:data-scarid='shopping.scarid'  v-bind:data-comid='shopping.comid'  v-bind:data-comcolorid='shopping.comcolorid'  v-bind:data-comsizeid='shopping.comsizeid'  v-bind:data-scarcount='shopping.scarcount'   class='shopping_scarid' type='checkbox' lay-skin='primary'> " +
+            "                </td>" +
+            "                <td>" +
+            "                    <div class=\"commodity_img\"><img v-bind:src='shopping.comdescribe.img'/></div>" +
+            "                    <div class=\"commodity_detail\">" +
+            "                        <div class=\"commodity_detail_name\"><a>{{shopping.commodity.comname}}</a></div>" +
+            "                        <div class=\"commodity_detail_ename\"><span>{{JSON.parse(shopping.comdescribe.diyparam).english}}</span></div>" +
+            "                        <div class=\"commodity_detail_size\"><span>{{JSON.parse(shopping.comdescribe.diyparam).weight}} 克</span></div>" +
+            "                        <div class=\"commodity_detail_shade\"><span>{{JSON.parse(shopping.comdescribe.diyparam).describe}}</span>" +
+            "                        </div>" +
+            "                        <div class=\"commodity_detail_cart\">" +
+            "                            <div>收藏</div>" +
+            "                            <div class='delsShoppingcar' v-bind:data-scarid='shopping.scarid'>移除</div>" +
+            "                        </div>" +
+            "                    </div>" +
+            "                </td>" +
+            "                <td>￥{{shopping.commodity.comprice}}</td>" +
+            "                <td>" +
+            "                    <div class='additionAndSubtraction scarcount_reduce' v-bind:data-scarid='shopping.scarid'> -</div>" +
+            "                    <span>{{shopping.scarcount}}</span>" +
+            "                    <div class='additionAndSubtraction scarcount_increase'  v-bind:data-scarid='shopping.scarid'>+</div>" +
+            "                </td>" +
+            "                <td>￥{{(shopping.scarcount)*(shopping.commodity.comprice)}}</td>" +
+            "            </tr>"
+        });
+
+        var comcar = {
+            init() {
+                comcar.binding();
+            },
+            getAllShoppingcar() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/secrecy/getAllShoppingcar",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        vm.$data.shoppingcar = data.data;
+                        vm.$forceUpdate();
+                    }
+                })
+            },
+            updateShoppingScarcount(scarid, scarcount) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/secrecy/updateShoppingScarcount",
+                    data: {
+                        scarid: scarid,
+                        scarcount: scarcount
+                    },
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        comcar.getAllShoppingcar();
+                    }
+                })
+            },
+            delsShoppingcar(scarids) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/secrecy/delsShoppingcar",
+                    data: JSON.stringify(scarids),
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        comcar.getAllShoppingcar();
+                    }
+                })
+            },
+
+            binding() {
+                $("#shopping").on("click", ".scarcount_reduce", function () {
+                    let scarcount = parseInt($(this).next().html());
+                    if (scarcount > 1) {
+                        comcar.updateShoppingScarcount($(this).data("scarid"), scarcount - 1);
+                    }
+                });
+
+                $("#shopping").on("click", ".scarcount_increase", function () {
+                    comcar.updateShoppingScarcount($(this).data("scarid"), parseInt($(this).prev().html()) + 1);
+                })
+
+                $("#shopping").on("click", ".delsShoppingcar", function () {
+                    let scarids = new Array();
+                    scarids.push($(this).data("scarid"));
+                    if (confirm("确定移除？")) {
+                        comcar.delsShoppingcar(scarids);
+                    }
+                })
+
+                $("#payment_order").click(function () {
+                    var shoppings = new Array();
+                    if ($('.shopping_scarid:checked').size() > 0) {
+                        $.each($('.shopping_scarid:checked'), function (index, data) {
+                            shoppings.push(
+                                {
+                                    "comid": $(data).data("comid"),
+                                    "comcolorid": 1,
+                                    "orderMoney": $("#orderMoney").html(),
+                                    "comsizeid": $(data).data("comsizeid"),
+                                    "scarcount": $(data).data("scarcount"),
+                                    "scarid": $(data).data("scarid")
+                                }
+                            );
+                            console.log($(data).data("scarid")+"=======");
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: "/rouge/secrecy/addOrder",
+                            data: JSON.stringify(shoppings),
+                            //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                            contentType: "application/json;charset=UTF-8",
+                            dataType: "json", //预期服务器返回的数据类型
+                            success: function (data) {
+                                if (data.code > 0) {
+                                    let parten = window.parent;
+                                    parten.showLayer(data.orderId);
+                                }
+                            }
+                        })
+                    } else {
+                        alert("请勾选商品!!")
+                    }
+
+                })
+            }
+        }
+
+        var vm = new Vue({
+            el: "#shopping",
+            data: {
+                shoppingcar: []
+            },
+            methods: {
+                getPriceCount() {
+                    let prictCount = 0;
+                    $.each(this.shoppingcar, function (index, obj) {
+                        prictCount += parseFloat(obj.scarcount * obj.commodity.comprice);
+                    })
+                    return prictCount;
+                }
+            },
+            beforeCreate: function () {
+                comcar.getAllShoppingcar();
+            },
+            updated() {
+            }
+        })
+        comcar.init();
+    })();
+    $("#height").val($("#shopping").height()+300);
+    $("#width").val($("#shopping").width());
+</script>
+</body>
+</html>

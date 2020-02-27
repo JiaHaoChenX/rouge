@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../../css/personal.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+</head>
+
+<body>
+<div id="big">
+    <input hidden id="height">
+    <input hidden id="width">
+    <div id="primary">
+        <div class="primary_left">
+            <div class="primary_left_up">
+                <div class="primary_left_name"> JiaHaoChen 先生</div>
+                <div class="primary_left_name_logout">
+                    <a href="/esclogin">退出登录</a>
+                </div>
+            </div>
+            <hr/>
+            <div class="primary_left_centre">
+                <div class="primary_left_centre_group">我的设置</div>
+                <ul class="primary_left_centre_group_ul">
+                    <li><a>个人信息</a></li>
+                    <li><a>管理地址</a></li>
+                </ul>
+                <div class="primary_left_centre_group">我的订单</div>
+                <ul class="primary_left_centre_group_ul">
+                    <li>我的订单</li>
+                </ul>
+                <div class="primary_left_centre_group">我的爱好</div>
+                <ul class="primary_left_centre_group_ul">
+                    <li>我的订阅</li>
+                    <li>我的心愿清单</li>
+                </ul>
+            </div>
+            <hr/>
+            <div class="primary_left_below">
+                <div class="primary_left_centre_group">联系我们</div>
+                <ul class="primary_left_centre_group_ul">
+                    <li>您可以通过以下方式联系我们</li>
+                    <li>客服热线：4009218833</li>
+                    <li>电子邮件：jhaoc@qq.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="primary_right">
+            <div class="primary_right_up">
+                <div>会员信息</div>
+                <table>
+                    <tr>
+                        <td>姓名</td>
+                        <td>会员积分</td>
+                        <td>会员类型</td>
+                        <td>到期日</td>
+                    </tr>
+                    <tr>
+                        <td>JiaHaoChen</td>
+                        <td>0积分</td>
+                        <td>钻石会员</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <iframe class="primary_right_below" width="100%" src="/leadingend/secrecy/Order" id="iframe"></iframe>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../../js/jquery/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $("#iframe").load(function () {
+        setTimeout(function () {
+            $("#iframe").css("height", parseInt(document.getElementById('iframe').contentWindow.document.getElementById('height').value));
+        }, 100);
+    });
+    $("#height").val($("#primary").height() + 200);
+    $("#width").val($("#primary").width());
+
+</script>
+</html>

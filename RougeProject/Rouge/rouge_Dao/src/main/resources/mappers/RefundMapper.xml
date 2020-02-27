@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.IRefundDao">
+
+    <select id="getAllRefund" parameterType="com.chenjiahao.rouge.entity.Refund" resultMap="getAllRefundMap">
+        SELECT
+            refund.refundid refundid,
+            refund.orderid orderid,
+            refund.refundMoney refundMoney,
+            refund.refundRemark refundRemark,
+            refund.refundstatic refundstatic,
+            refund.refundTime refundTime,
+            refund.refundMerchantRemark refundMerchantRemark,
+            order.aid aid,
+            order.siteid siteid,
+            order.sitepurchase sitepurchase,
+            order.orderMoney orderMoney,
+            order.orderRemark orderRemark,
+            order.comstatic comstatic,
+            `user`.uid uid,
+            `user`.uidentityid uidentityid,
+            `user`.uname uname,
+            `user`.umail umail,
+            `user`.uphone uphone,
+            `user`.uportrait uportrait
+        FROM
+            refund
+            INNER JOIN `order` ON refund.orderid = order.orderid
+            INNER JOIN `user` ON order.aid = `user`.aid
+    </select>
+    <resultMap id="getAllRefundMap" type="com.chenjiahao.rouge.entity.Refund">
+        <id property="refundid" column="refundid"></id>
+        <result property="orderid" column="orderid"></result>
+        <result property="refundMoney" column="refundMoney"></result>
+        <result property="refundRemark" column="refundRemark"></result>
+        <result property="refundstatic" column="refundstatic"></result>
+        <result property="refundTime" column="refundTime"></result>
+        <result property="refundMerchantRemark" column="refundMerchantRemark"></result>
+        <association property="order" javaType="com.chenjiahao.rouge.entity.Order">
+            <id property="orderid" column="orderid"></id>
+            <result property="aid" column="aid"></result>
+            <result property="siteid" column="siteid"></result>
+            <result property="sitepurchase" column="sitepurchase"></result>
+            <result property="orderMoney" column="orderMoney"></result>
+            <result property="orderRemark" column="orderRemark"></result>
+            <result property="comstatic" column="comstatic"></result>
+        </association>
+        <association property="user" javaType="com.chenjiahao.rouge.entity.User">
+            <id property="uid" column="uid"></id>
+            <result property="aid" column="aid"></result>
+            <result property="uidentityid" column="uidentityid"></result>
+            <result property="uname" column="uname"></result>
+            <result property="umail" column="umail"></result>
+            <result property="uphone" column="uphone"></result>
+            <result property="uportrait" column="uportrait"></result>
+        </association>
+    </resultMap>
+    <insert id="addRefund" parameterType="com.chenjiahao.rouge.entity.Refund">
+        INSERT INTO refund (orderid, refundMoney, refundRemark, refundstatic, refundTime, refundMerchantRemark)
+        VALUES (#{orderid}, #{refundMoney}, #{refundRemark}, default, default, #{refundMerchantRemark})
+    </insert>
+
+    <update id="updateRefund" parameterType="com.chenjiahao.rouge.entity.Refund">
+        UPDATE refund
+        SET refundMoney = #{refundMoney},
+            refundRemark = #{refundRemark},
+            refundstatic = #{refundstatic},
+            refundTime = now(),
+            refundMerchantRemark = #{refundMerchantRemark}
+        WHERE orderid = #{orderid}
+    </update>
+
+</mapper>

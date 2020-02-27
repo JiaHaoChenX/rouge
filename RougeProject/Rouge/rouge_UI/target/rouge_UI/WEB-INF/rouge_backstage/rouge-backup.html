@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta name="viewport"
+  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>-->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../x-admin/css/font.css">
+    <link rel="stylesheet" href="../../x-admin/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../../x-admin/js/xadmin.js"></script>
+    <script src="../../x-admin/lib/layui/layui.js"></script>
+    <script src="../../js/template/template-web.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css" charset="utf-8">
+    <script src="../../js/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <!--<script src="../../js/pac/js/citys.js"></script>-->
+    <!--<script src="../../js/pac/js/layui.all.js"></script>-->
+    <!--<script src="../../js/layui/layui.all.js"></script>-->
+
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+</head>
+
+<body class="layui-anim layui-anim-up">
+<div class="x-nav">
+			<span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:38px;margin: auto;">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-form-pane layui-col-md12 x-so" id="rougeForm">
+            <div class="layui-inline">
+                <label class="layui-form-label">最小日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sitepurchaseMin" id="sitepurchaseMin" lay-verify="date"
+                           placeholder="yyyy-MM-dd"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">最大日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sitepurchaseMax" id="sitepurchaseMax" lay-verify="date"
+                           placeholder="yyyy-MM-dd"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <button type="button" class="layui-btn" id="selectrouge"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+    </div>
+    <xblock>
+        <button class="layui-btn" id="rougeBackup"><i class="layui-icon"></i>备份</button>
+        <span class="x-right" style="line-height:40px"></span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
+                        class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>编号</th>
+            <th>数据库</th>
+            <th>备份时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="tablerouge">
+
+        </tbody>
+    </table>
+    <div id="pageRougerouge">
+
+    </div>
+
+</div>
+
+<script>
+    (function ($) {
+        $.fn.serializeJson = function () {
+            var serializeObj = {};
+            $(this.serializeArray()).each(function () {
+                serializeObj[this.name] = this.value;
+            });
+            return serializeObj;
+        };
+        $('#btn').click(function () {
+            var data = $('#form').serializeJson();// 调用serializeJson方法获取表单内容
+            console.log(data);
+        })
+    })(jQuery);
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#sitepurchaseMin'
+        });
+        laydate.render({
+            elem: '#sitepurchaseMax'
+        });
+    });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<!--渲染表格的模板-->
+<script type="text/html" id="showrouge">
+    {{each data backup index}}
+    <tr>
+        <td>
+            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i>
+            </div>
+        </td>
+        <td>{{backup.backupid}}</td>
+        <td>{{backup.backupidname}}</td>
+        <td>{{backup.refundTime}}</td>
+        <td class="td-manage">
+            <button class="layui-btn layui-btn-danger rougeRecover" data-sqlname={{backup.backupidname}}><i
+                    class="layui-icon"></i>还原
+            </button>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/javascript">
+    (function () {
+        var com = {
+            rougeParams: {},
+            rougeCount: 0,
+            rougeCurr: 1,
+            init() {
+                com.binding();
+                com.getBackupCount({
+                    refundTimeMin: "",
+                    refundTimeMax: ""
+                });
+            },
+            getBackupCount(backupParams) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getBackupCount",
+                    data: backupParams,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data.count);
+                        com.rougeCount = data.count
+                        $(".x-right").html("总共有," + data.count + "条记录");
+                        com.showPager(backupParams);
+                    }
+                })
+            },
+            showPager(rougeParams) {
+                layui.use('laypage', function () {
+                    var laypage = layui.laypage;
+                    //执行一个laypage实例
+                    laypage.render({
+                        elem: 'pageRougerouge' //注意，这里的 test1 是 ID，不用加 # 号
+                        ,
+                        count: com.rougeCount //数据总数，从服务端得到
+                        ,
+                        limit: 10,  //现实行数
+                        curr: com.rougeCurr, //当前所在哪页
+                        jump: function (obj, first) {
+                            com.rougeCurr = obj.curr;
+                            rougeParams.pageNo = ((obj.curr - 1) * obj.limit);//得到当前页，算出当前跳过的页数
+                            rougeParams.pageSize = obj.limit; //得到每页显示的条数
+                            com.rougeParams = rougeParams;
+                            com.getPageBackup(rougeParams);
+                        }
+                    })
+                })
+            },
+            getPageBackup(rougeParams) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getPageBackup",
+                    data: rougeParams,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        var html = template("showrouge", data);
+                        document.getElementById("tablerouge").innerHTML = html;
+                    }
+                })
+            },
+            rougeBackup() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/rougeBackup",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        if (data.code) {
+                            layer.msg('备份成功!', {icon: 1, time: 1000});
+                            com.getBackupCount({
+                                refundTimeMin: "",
+                                refundTimeMax: ""
+                            });
+                        } else {
+                            layer.msg('备份失败!', {icon: 0, time: 1000});
+                        }
+                    }
+                })
+            },
+            rougeRecover(sqlname) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/rougeRecover?sqlname=" + sqlname + "",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code) {
+                            layer.msg('还原成功!', {icon: 1, time: 1000});
+                            location.replace(location.href);
+                        } else {
+                            layer.msg('还原失败!', {icon: 0, time: 1000});
+                        }
+                    }
+                })
+            },
+            binding() {
+                $("#rougeBackup").click(function () {
+                    com.rougeBackup();
+                })
+
+                $("#tablerouge").on("click", ".rougeRecover", function () {
+                    if (confirm("确定还原?")) {
+                        com.rougeRecover($(this).data("sqlname"));
+                    }
+                })
+            }
+        }
+        com.init();
+    }());
+
+</script>
+</body>
+
+</html>

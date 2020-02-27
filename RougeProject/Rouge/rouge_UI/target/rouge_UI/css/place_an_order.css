@@ -1,0 +1,112 @@
+#body {
+  width: 950px;
+  margin: 30px auto; }
+
+#body > .body_left,
+#body > .body_right {
+  box-shadow: 0px 1px 8px #9A9A9A;
+  margin-left: 5px;
+  margin: 5px;
+  margin-top: 10px; }
+
+#body > .body_left {
+  float: left;
+  width: 65%;
+  text-indent: 20px;
+  color: #636363;
+  padding-bottom: 30px; }
+
+.body_left_title {
+  margin-top: 10px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px; }
+
+#body_left_shoppingcar {
+  text-align: center; }
+
+.body_left_shoppingcar > tbody {
+  border: 1px solid #9A9A9A; }
+
+#body_left_shoppingcar > td {
+  margin: auto; }
+
+.body_left_title > span {
+  margin-left: 5px;
+  margin-right: 5px; }
+
+.body_left_shoppingcar td {
+  position: relative;
+  font-size: 12px; }
+
+.body_left_shoppingcar_img {
+  height: 120px; }
+
+.body_left_shoppingcar_name {
+  width: 200px;
+  font-size: 13px;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.body_left_shoppingcar_qty, .body_left_shoppingcar_minus {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  text-align: center;
+  text-indent: 0; }
+
+.body_left_shoppingcar_minus {
+  border-radius: 50%;
+  background: #F6F6F6;
+  border: 1px solid #9A9A9A; }
+
+.body_left_shoppingcar_desc {
+  position: absolute;
+  bottom: 0;
+  color: #000000; }
+
+.body_left_settle {
+  width: 500px;
+  margin: auto;
+  border-top: 1px solid #9A9A9A;
+  border-bottom: 1px solid #9A9A9A;
+  height: 40px;
+  line-height: 40px; }
+
+.body_left_settle > div {
+  float: right; }
+
+.body_left_submit {
+  margin-top: 10px;
+  height: 100px;
+  background: #F0F0F0;
+  position: relative; }
+
+.body_left_submit > div {
+  width: 130px;
+  height: 30px;
+  float: right;
+  text-align: center;
+  text-indent: 0;
+  line-height: 30px;
+  margin-right: 10px;
+  border-radius: 15px;
+  margin-top: 50px; }
+
+.body_left_submit > div:first-child {
+  background: white;
+  color: #000000; }
+
+.body_left_submit > div:last-child {
+  background: #020202;
+  color: white; }
+
+#body > .body_right {
+  float: right;
+  width: 32%;
+  height: 300px; }
+
+/*# sourceMappingURL=place_an_order.css.map */

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #cco {
+            width: 900px;
+            height: 400px;
+            margin: auto;
+
+        }
+
+        #address {
+            display: flex; /*定义为弹性盒子*/
+            flex-direction: row; /*设置排列方式*/
+            justify-content: space-between; /*设置水平对齐方式*/
+            align-items: flex-start; /*设置改行垂直对齐方式*/
+            flex-wrap: wrap; /*设置溢出是否换行*/
+        }
+
+        #address > div {
+            width: 180px;
+            height: 80px;
+            background: #EFEFEF;
+            margin: 5px;
+            font-size: 13px;
+            padding: 3px;
+        }
+
+        #address > div > p {
+            margin: 3px;
+        }
+
+        #address > div:hover {
+            background: #B0B0B0;
+        }
+
+        #address > .Selection {
+            background: #B0B0B0;
+        }
+
+        #Remarks {
+            width: 100%;
+            height: 100px;
+            font-size: 14px;
+            margin: 20px auto;
+        }
+
+        #operation > div {
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            float: right;
+            margin: 10px;
+        }
+
+        #operation_ok {
+            background: white;
+            border: 1px solid black;
+        }
+
+        #operation_ok:hover {
+            background: black;
+            color: white;
+        }
+
+        #operation_esc {
+            background: black;
+            color: white;
+            border: 1px solid black;
+        }
+
+        #operation_esc:hover {
+            background: white;
+            color: black;
+        }
+
+        #address > .operation_add {
+            background: white;
+            color: black;
+            font-size: 70px;
+            text-align: center;
+            line-height: 80px;
+        }
+    </style>
+</head>
+<body>
+<div id="cco">
+    <div id="address"></div>
+    <textarea id="Remarks">备注：</textarea>
+    <div id="operation">
+        <div id="operation_ok">下单</div>
+        <div id="operation_esc">取消</div>
+    </div>
+</div>
+
+<script src="../../js/jquery/jquery-1.11.3.js"></script>
+
+<script src="../../js/template/template-web.js"></script>
+<script src="../../js/layer/layer.js"></script>
+
+<!--渲染AllGoods的模板-->
+<script type="text/html" id="showSite">
+    {{each data site index}}
+    {{if index<1}}
+    <div class="Selection site" data-siteid="{{site.siteid}}">
+        <p>{{site.sitename}}</p>
+        <p>{{site.sitephone}}</p>
+        <p>{{site.siteprovince}}{{site.sitecity}}{{site.sitecounty}}{{site.sitedetailed}}</p>
+    </div>
+    {{else}}
+    <div class="site" data-siteid="{{site.siteid}}">
+        <p>{{site.sitename}}</p>
+        <p>{{site.sitephone}}</p>
+        <p>{{site.siteprovince}}{{site.sitecity}}{{site.sitecounty}}{{site.sitedetailed}}</p>
+    </div>
+    {{/if}}
+    {{/each}}
+    <div class="operation_add">
+        +
+    </div>
+</script>
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    var cco = {
+        init() {
+            cco.getSite();
+            cco.binding();
+        }, getSite() {
+            $.ajax({
+                type: "POST",
+                url: "/rouge/secrecy/getSite",
+                data: "",
+                //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                // contentType: "application/json;charset=UTF-8",
+                dataType: "json", //预期服务器返回的数据类型
+                success: function (data) {
+                    console.log(data);
+                    var html = template("showSite", data);
+                    document.getElementById("address").innerHTML = html;
+                }
+            })
+        },
+        binding() {
+            $("#operation_esc").click(function () {
+                let parten = window.parent;
+                parten.layer.closeAll();
+            })
+            $("#operation_ok").click(function () {
+                var order = {
+                    "orderid": getUrlParam("orderId"),
+                    "siteid": $(".Selection").data("siteid"),
+                    "orderRemark": $("#Remarks").val(),
+                    "comstatic": 1
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/secrecy/operation_ok",
+                    data: order,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data)
+                        if (data.code > 0) {
+                            alert("下单成功!!");
+                            let parten = window.parent;
+                            parten.layer.closeAll();
+                            parten.location.reload(true);
+                        }
+                    }
+                })
+
+            })
+
+            $("#address").on("click", ".operation_add", function () {
+                alert("添加地址!!");
+            });
+
+            $("#address").on("click", ".site", function () {
+                $(this).parent().children().removeClass("Selection");
+                $(this).addClass("Selection");
+            });
+        }
+    }
+    cco.init();
+</script>
+</body>
+</html>

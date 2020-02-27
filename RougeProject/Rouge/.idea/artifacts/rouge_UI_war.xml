@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rouge_UI:war">
+    <output-path>$PROJECT_DIR$/rouge_UI/target</output-path>
+    <root id="archive" name="rouge_UI.war">
+      <element id="artifact" artifact-name="rouge_UI:war exploded" />
+    </root>
+  </artifact>
+</component>

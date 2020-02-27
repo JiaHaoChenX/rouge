@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.IAccountDao">
+    <insert id="addAccount" parameterType="com.chenjiahao.rouge.entity.Account">
+        INSERT INTO account (aid, apassword, atid, astatic) VALUES (#{aid}, MD5(#{apassword}), #{atid}, default);
+    </insert>
+
+    <select id="isLoginAccount" parameterType="com.chenjiahao.rouge.entity.Account"
+            resultType="com.chenjiahao.rouge.entity.Account">
+        SELECT
+            account.aid,
+            apassword,
+            account.atid,
+            astatic
+        FROM account
+        WHERE apassword = MD5(#{apassword}) AND aid = #{aid};
+    </select>
+
+    <update id="updateAccountAtid" parameterType="com.chenjiahao.rouge.entity.Account">
+        UPDATE account
+        SET
+        <if test="atid!=0">
+            atid = #{atid},
+        </if>
+        <if test="astatic!=-1">
+            astatic = #{astatic},
+        </if>
+        aid=#{aid}
+        WHERE aid = #{aid};
+    </update>
+
+    <select id="getAllAccount" resultType="com.chenjiahao.rouge.entity.Account">
+        SELECT
+            account.aid,
+            apassword,
+            account.atid,
+            astatic,
+            atname
+        FROM
+            account
+            INNER JOIN accounttype ON account.atid = accounttype.atid
+    </select>
+
+</mapper>

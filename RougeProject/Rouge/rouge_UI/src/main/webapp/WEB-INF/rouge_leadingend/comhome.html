@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rouge购物商城</title>
+    <link rel="stylesheet" href="../../css/index.css"/>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css"/>
+    <link rel="stylesheet" href="../../css/commod.css">
+
+    <style>
+        #comTypeList > li {
+            transition-timing-function: ease-out;
+            transition-duration: 1s;
+        }
+
+        #comTypeList > li:hover {
+            border-bottom: 1px solid white;
+        }
+
+        #comTypeList > li:first-child:hover {
+            border-bottom: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            transition-timing-function: ease-out;
+            transition-duration: 1s;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+
+    </style>
+    <script src="../../js/jquery/jquery-1.11.3.js"></script>
+</head>
+
+<body>
+<div id="big">
+    <header id="header">
+        <div class="header_big">
+            <div class="header_big_left">
+                <ul style="margin-bottom: 10PX;" id="comTypeList"></ul>
+            </div>
+
+            <div class="header_big_right">
+                <ul>
+                    <li class="">
+                        <a href="/leadingend/userhome?jump=personal" class="header_big_right_ul_li_su">&#xF2C0;</a>
+                    </li>
+                    <li class="" style="position: relative">
+                        <a href="/leadingend/userhome?jump=shoppingcar" class="header_big_right_ul_li_su"
+                           style="margin: auto">&#xF290;</a>
+                        <span id="ShoppingcarCount"
+                              style="color: black;font-size: 14px;position: absolute;left:49%;top: 60%;transform: translate(-50%,-50%)">0</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!--搜索栏那块-->
+    <div id="grabble">
+        <div class="grabble_big">
+            <div class="grabble_big_left">
+                <div>R</div>
+            </div>
+            <div class="grabble_big_right">
+                <div class="grabble_big_right_input">
+                    <div class="grabble_big_right_input_tb">
+                        <input type="text" placeholder="请输入需要的商品" style="font-size: 12px;"/>
+                        <input type="button" class="grabble_big_right_input_tb_search" value="&#xe801;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content content-nav-base commodity-content" style="margin-top: 100px">
+
+        <div id="height111" style="display: none">...</div>
+        <div class="commod-cont-wrap" id="commod-cont-wrap">
+            <div class="commod-cont w950 ">
+                <div class="right-cont-wrap">
+                    <div class="right-cont">
+                        <div class="sort layui-clear">
+                            <a class="active" href="javascript:;" event='volume'>销量</a>
+                            <a href="javascript:;" event='price'>价格</a>
+                            <a href="javascript:;" event='newprod'>新品</a>
+                            <a href="javascript:;" event='collection'>收藏</a>
+                        </div>
+                        <div class="prod-number">
+                            <span id="goodsCount">200个</span>
+                        </div>
+                        <div class="cont-list" id="list-cont">
+                            <div class="item">
+                                <div class="img">
+                                    <a href="javascript:;">
+                                        <img src="/goods_img/a1.jpg" width="280px" height="281px">
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <p class="title">森系小清新四件套</p>
+                                    <p class="price">
+                                        <span class="pri">￥200</span>
+                                        <span class="nub">1266付款</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="demo0" style="text-align: center;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../js/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../js/layui/layui.js"></script>
+<script src="../../js/template/template-web.js"></script>
+<!--渲染导航栏的模板-->
+<script type="text/html" id="showComType">
+    <li class="header_big_left_ul_li_home" style="margin-bottom: 13px; text-align: right;"><a href="/leadingend/index">&#xe807;</a>
+    </li>
+    {{each data comtype index}}
+    {{if (index+1)%2==0}}
+    <li class="border_right comtype" data-comtid="{{comtype.comtid}}"><a>{{comtype.comtname}}</a></li>
+    {{else}}
+    <li class="comtype" data-comtid="{{comtype.comtid}}"><a>{{comtype.comtname}}</a></li>
+    {{/if}}
+    {{/each}}
+</script>
+
+<!--渲染商品的模板-->
+<script type="text/html" id="showGoodsByType">
+    {{each data GoodsByType index}}
+    <div class="item">
+        <div class="img">
+            <a href="/leadingend/productparticulars.html?comid={{GoodsByType.comid}}">
+                <img src="/goods_img/{{GoodsByType.commodityimgs[0].imgpath}}" width="280px" height="281px">
+            </a>
+        </div>
+        <div class="text">
+            <p class="title">{{GoodsByType.comname}}</p>
+            <p class="price">
+                <span class="pri">{{GoodsByType.comprice}}￥</span>
+                <span class="nub">{{GoodsByType.salesvolumes}}人付款</span>
+            </p>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+    var goods;
+    //渲染商品类型
+    (function () {
+        var comtype = {
+            init() {
+                comtype.getAllCommodityType();
+                comtype.getAllShoppingcarCount();
+            },
+            getAllCommodityType() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllCommodityType",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        var html = template("showComType", data);
+                        document.getElementById("comTypeList").innerHTML = html;
+                    }
+                })
+            }, getAllShoppingcarCount() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllShoppingcarCount",
+                    data: "",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        $("#ShoppingcarCount").text(data.count);
+                    }
+                })
+            }
+        }
+        comtype.init();
+    }());
+
+    //渲染商品
+    (function () {
+        goods = {
+            init() {
+                goods.binding();
+            }, getGoodsByType(comtid) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getGoodsByType?comtid="+comtid+"",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        var html = template("showGoodsByType", data);
+                        document.getElementById("list-cont").innerHTML = html;
+                        $("#goodsCount").text(data.count+"个")
+                    }
+                })
+            }
+            , binding() {
+                $("#comTypeList").on("click", ".comtype", function () {
+                    goods.getGoodsByType($(this).data("comtid"));
+                })
+            }
+
+        }
+        goods.init();
+    })();
+
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#poster',
+            width: '100%', //设置容器宽度s
+            height: '400px',
+            arrow: 'hover' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+
+    layui.config({
+        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['mm', 'laypage', 'jquery'], function () {
+        var laypage = layui.laypage, $ = layui.$,
+            mm = layui.mm;
+        laypage.render({
+            elem: 'demo0'
+            , count: 100 //数据总数
+        });
+        $('.sort a').on('click', function () {
+            $(this).addClass('active').siblings().removeClass('active');
+        })
+        $('.list-box dt').on('click', function () {
+            if ($(this).attr('off')) {
+                $(this).removeClass('active').siblings('dd').show()
+                $(this).attr('off', '')
+            } else {
+                $(this).addClass('active').siblings('dd').hide()
+                $(this).attr('off', true)
+            }
+        })
+    });
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //首次渲染的商品
+    (function () {
+        if (getUrlParam("comtid") != "" && getUrlParam("comtid") != null) {
+            goods.getGoodsByType(getUrlParam("comtid"));
+        }
+    })();
+
+</script>
+</body>
+
+</html>

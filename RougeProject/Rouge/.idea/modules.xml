@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Rouge.iml" filepath="$PROJECT_DIR$/Rouge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rouge_Dao/rouge_Dao.iml" filepath="$PROJECT_DIR$/rouge_Dao/rouge_Dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rouge_Entity/rouge_Entity.iml" filepath="$PROJECT_DIR$/rouge_Entity/rouge_Entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rouge_Service/rouge_Service.iml" filepath="$PROJECT_DIR$/rouge_Service/rouge_Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rouge_UI/rouge_UI.iml" filepath="$PROJECT_DIR$/rouge_UI/rouge_UI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rouge_Utils/rouge_Utils.iml" filepath="$PROJECT_DIR$/rouge_Utils/rouge_Utils.iml" />
+    </modules>
+  </component>
+</project>

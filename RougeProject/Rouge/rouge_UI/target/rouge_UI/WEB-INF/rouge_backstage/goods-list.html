@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta name="viewport"
+  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>-->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../x-admin/css/font.css">
+    <link rel="stylesheet" href="../../x-admin/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../../x-admin/js/xadmin.js"></script>
+    <script src="../../x-admin/lib/layui/layui.js"></script>
+    <script src="../../js/template/template-web.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../js/layui/css/layui.css" charset="utf-8">
+    <script src="../../js/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+</head>
+
+<body class="layui-anim layui-anim-up">
+<div class="x-nav">
+			<span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:38px;margin: auto;">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so" id="commodityForm">
+            <input type="text" name="comname" placeholder="请输入商品名称" class="layui-input">
+            <input type="radio" name="comstatic" value="0" title="停售">
+            <input type="radio" name="comstatic" value="1" title="在售">
+            <input type="radio" name="comstatic" value="-1" title="全部" checked>
+            <select name="comtid" lay-ignore style="display: inline-block; width: 200px;height: 38px"
+                    id="showSpanCommodityType"> </select>
+            <button type="button" class="layui-btn" id="selectCommodity"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+    </div>
+    <xblock>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn" onclick="x_admin_show('添加商品','./goods-add.html',600,400)"><i class="layui-icon"></i>添加
+        </button>
+        <span class="x-right" style="line-height:40px"></span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
+                        class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>编号</th>
+            <th>商品名称</th>
+            <th>价格</th>
+            <th>库存</th>
+            <th>类型</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="tableGoods"></tbody>
+    </table>
+    <div id="pageRougeCommodity">
+
+    </div>
+
+</div>
+
+<script>
+    (function ($) {
+        $.fn.serializeJson = function () {
+            var serializeObj = {};
+            $(this.serializeArray()).each(function () {
+                serializeObj[this.name] = this.value;
+            });
+            return serializeObj;
+        };
+        $('#btn').click(function () {
+            var data = $('#form').serializeJson();// 调用serializeJson方法获取表单内容
+            console.log(data);
+        })
+    })(jQuery);
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<!--渲染表格的模板-->
+<script type="text/html" id="showGoods">
+    {{each data commodity index}}
+    <tr>
+        <td>
+            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='1'><i class="layui-icon">&#xe605;</i>
+            </div>
+        </td>
+        <td>{{commodity.comid}}</td>
+        <td>{{commodity.comname}}</td>
+        <td>{{commodity.comprice}}￥</td>
+        <td>{{commodity.cominventory}}</td>
+        <td>{{commodity.comtname}}</td>
+        {{if commodity.comstatic==0}}
+        <td>停售</td>
+        {{else}}
+        <td>在售</td>
+        {{/if}}
+        <td class="td-manage">
+            {{if commodity.comstatic==0}}
+            <a href="javascript:;" title="上架">
+                <i class="layui-icon">&#xe62f;</i>
+            </a>
+            {{else}}
+            <a href="javascript:;" title="下架">
+                <i class="layui-icon">&#xe601;</i>
+            </a>
+            {{/if}}
+            <a title="编辑" onclick="x_admin_show('编辑','goods-add.html?comid={{commodity.comid}}',600,400)"
+               href="javascript:;">
+                <i class="layui-icon">&#xe642;</i>
+            </a>
+            <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                <i class="layui-icon">&#xe631;</i>
+            </a>
+            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/html" id="showCommodityType">
+    <option value="0">请选择商品类型</option>
+    {{each data CommodityType index}}
+    <option value="{{CommodityType.comtid}}">{{CommodityType.comtname}}</option>
+    {{/each}}
+</script>
+<script type="text/javascript">
+    (function () {
+        var com = {
+            commodityParams: {},
+            commodityCount: 0,
+            commodityCurr: 1,
+            init() {
+                com.binding();
+                com.getAllCommodityType();
+                com.getCommodityCount({
+                    comname: "",
+                    comtid: 0,
+                    comstatic: -1,
+                    compriceMin: 0,
+                    compriceMax: 0
+                });
+            },
+            getCommodityCount(commodityParams) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllCommodity",
+                    data: commodityParams,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        com.commodityCount = data.count
+                        $(".x-right").html("总共有," + data.count + "个商品");
+                        com.showPage(commodityParams);
+                    }
+                })
+            },
+            showPage(commodityParams) {
+                layui.use('laypage', function () {
+                    var laypage = layui.laypage;
+                    //执行一个laypage实例
+                    laypage.render({
+                        elem: 'pageRougeCommodity' //注意，这里的 test1 是 ID，不用加 # 号
+                        ,
+                        count: com.commodityCount //数据总数，从服务端得到
+                        ,
+                        limit: 10,  //现实行数
+                        curr: com.commodityCurr, //当前所在哪页
+                        jump: function (obj, first) {
+                            com.commodityCurr = obj.curr;
+                            commodityParams.pageNo = ((obj.curr - 1) * obj.limit);//得到当前页，算出当前跳过的页数
+                            commodityParams.pageSize = obj.limit; //得到每页显示的条数
+                            com.commodityParams = commodityParams;
+                            com.getPageCommodity(commodityParams);
+                        }
+                    })
+                })
+            },
+            getPageCommodity(commodityParams) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getPageCommodity",
+                    data: commodityParams,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        var html = template("showGoods", data);
+                        document.getElementById("tableGoods").innerHTML = html;
+                    }
+                })
+            },
+            getAllCommodityType() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllCommodityType",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        let html = template("showCommodityType", data);
+                        document.getElementById("showSpanCommodityType").innerHTML = html;
+                    }
+                })
+            },
+            updateAccountAtid(account) {
+                console.log(account)
+                $.ajax({
+                    type: "POST",
+                    url: "/login/updateAccountAtid",
+                    data: account,
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code > 0) {
+                            com.getUserCount(com.userParams);
+                            layer.msg('修改成功!', {icon: 1, time: 1000});
+                        } else {
+                            layer.msg('修改失败!', {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            },
+            binding() {
+                $("#selectCommodity").click(function () {
+                    let commodityParams = $("#commodityForm").serializeJson();
+                    console.log(commodityParams);
+                    com.getCommodityCount(commodityParams);
+                })
+
+                // $(".layui-table").on("click", ".blockUpId", function () {
+                //     let aid = this.getAttribute("data-aid");
+                //     let title = this.getAttribute("title");
+                //     if (title == "启用") {
+                //         com.updateAccountAtid({
+                //             aid: aid,
+                //             astatic: 1
+                //         }, this)
+                //     } else if (title == "冻结") {
+                //         com.updateAccountAtid({
+                //             aid: aid,
+                //             astatic: 0
+                //         })
+                //     }
+                // })
+            }
+        }
+        com.init();
+    }());
+
+</script>
+</body>
+
+</html>

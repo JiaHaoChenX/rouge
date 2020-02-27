@@ -1,0 +1,170 @@
+body {
+    font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53', sans-serif;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.w950 {
+    width: 950px;
+    margin: 0 auto;
+}
+
+.nobor {
+    border-bottom: 0 !important;
+}
+
+.margin0 {
+    margin: 0 !important;
+}
+
+.padding0 {
+    padding: 0 !important;
+}
+
+i {
+    font-style: normal;
+}
+
+/*commodity*/
+.commodity-content .commod-cont-wrap {
+    background: #f8f8f8;
+    padding: 50px 0 0 0;
+    width: 950px;
+    overflow:hidden;
+    margin: auto;
+}
+
+.commodity-content .commod-cont .left-nav {
+    width: 200px;
+    line-height: 38px;
+    background: #fff;
+}
+
+.commodity-content .commod-cont .left-nav .list-box {
+    border: 1px solid #eeeeee;
+}
+
+.commodity-content .commod-cont .left-nav .title {
+    color: #fff;
+    font-size: 16px;
+    background: #333333;
+    text-align: center;
+}
+
+.commodity-content .commod-cont .left-nav .list-box dt, .commodity-content .commod-cont .left-nav .list-box dd {
+    border-bottom: 1px dashed #eeeeee;
+    cursor: pointer;
+}
+
+.commodity-content .commod-cont .left-nav .list-box dd:hover a {
+    color: #ff5500;
+}
+
+.commodity-content .commod-cont .left-nav .list-box dt {
+    font-size: 14px;
+    color: #333;
+    background: url("../img/tubiao/sort-arrow.png") 8px -2px no-repeat;
+    cursor: pointer;
+}
+
+.commodity-content .commod-cont .left-nav .list-box dt.active {
+    background-position: 8px -40px;
+}
+
+.commodity-content .commod-cont .left-nav .list-box dd a {
+    padding-left: 42px;
+    color: #888888;
+}
+
+.commodity-content .commod-cont .left-nav .list-box dl:last-child dd:last-child {
+    border-bottom: 0;
+}
+
+.commodity-content .commod-cont .right-cont-wrap {
+    /*float: left;*/
+    margin: auto;
+    width: 950px;
+}
+
+.commodity-content .commod-cont .right-cont {
+    width: 1000px;
+}
+
+.commodity-content .commod-cont .right-cont .sort {
+    margin-top: 5px;
+    padding-left: 10px ;
+}
+
+.commodity-content .commod-cont .right-cont .sort a {
+    width: 58px;
+    height: 26px;
+    line-height: 26px;
+    font-size: 14px;
+    color: #333333;
+    border: 1px solid #eaeaea;
+    float: left;
+    background: #fff;
+    background: #fff url("../img/tubiao/sort-arrow.png") no-repeat 41px 0;
+    text-indent: 9px;
+}
+
+.commodity-content .commod-cont .right-cont .sort a.active {
+    background-position: 41px -26px;
+}
+.prod-number{
+    /*padding-left: 10px;*/
+}
+.commodity-content .commod-cont .right-cont .prod-number {
+    line-height: 44px;
+    font-size: 16px;
+    padding-left: 7px;
+}
+.item{
+    margin-bottom: 50px;
+}
+.commodity-content .commod-cont .right-cont .cont-list .item {
+    /*float: left;*/
+    width: 280px;
+    height: 366px;
+    border: 1px solid #eaeaea;
+    background: #fff;
+}
+
+.cont-list{
+    width: 950px;
+    display: flex;                    /*定义为弹性盒子*/
+    flex-direction:row;                /*设置排列方式*/
+    justify-content:space-between ;    /*设置水平对齐方式*/
+    align-items:flex-start;                /*设置改行垂直对齐方式*/
+    flex-wrap:wrap;            /*设置溢出是否换行*/
+    /*padding: 5px;*/
+}
+.commodity-content .commod-cont .right-cont .cont-list .item .img {
+    border-bottom: 1px solid #eaeaea;
+    height: 280px;
+}
+
+.commodity-content .commod-cont .right-cont .cont-list .item .text {
+    padding: 14px 0 0 14px;
+}
+
+.commodity-content .commod-cont .right-cont .cont-list .title {
+    color: #333333;
+    font-size: 16px;
+    margin-bottom: 14px;
+}
+
+.commodity-content .commod-cont .right-cont .cont-list .price {
+    position: relative;
+}
+
+.commodity-content .commod-cont .right-cont .cont-list .pri {
+    color: #ee0000;
+}
+
+
+
+
+
+

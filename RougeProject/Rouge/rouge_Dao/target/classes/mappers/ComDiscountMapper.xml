@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.IComdiscountDao">
+    <!--<insert id="getAllDiscount" parameterType="com.chenjiahao.rouge.entity.Shoppingcar">-->
+    <!--INSERT INTO shoppingcar (aid, comid, scarcount) VALUES (#{aid}, #{comid}, #{comid});-->
+    <!--</insert>-->
+
+
+    <select id="getAllDiscount" resultMap="getAllDiscountMap">
+        SELECT
+            comdiscount.comdisid,
+            comdiscount.comid comid,
+            comdiscount.discount,
+            commodity.comname,
+            commodity.comtid,
+            commodity.comprice,
+            commodity.comproduce,
+            commodity.comstatic,
+            commodity.cominventory,
+            commodityimg.comiid,
+            commodityimg.imgpath
+        FROM
+            comdiscount
+            INNER JOIN commodity ON comdiscount.comid = commodity.comid
+            INNER JOIN commodityimg ON commodityimg.comid = comdiscount.comid
+        WHERE commodity.comstatic != 0
+    </select>
+    <resultMap id="getAllDiscountMap" type="com.chenjiahao.rouge.entity.Comdiscount">
+        <id property="comdisid" column="comdisid"></id>
+        <result property="comid" column="comid"></result>
+        <result property="discount" column="discount"></result>
+        <association property="commodity" javaType="com.chenjiahao.rouge.entity.Commodity">
+            <id property="comid" column="comid"></id>
+            <result property="comname" column="comname"></result>
+            <result property="comtid" column="comtid"></result>
+            <result property="comprice" column="comprice"></result>
+            <result property="comproduce" column="comproduce"></result>
+            <result property="comstatic" column="comstatic"></result>
+            <result property="cominventory" column="cominventory"></result>
+        </association>
+        <collection property="commodityimgs" ofType="com.chenjiahao.rouge.entity.Commodityimg">
+            <id property="comiid" column="comiid"/>
+            <result property="comid" column="comid"/>
+            <result property="imgpath" column="imgpath"/>
+        </collection>
+    </resultMap>
+
+    <!--<delete id="delsShoppingcar">-->
+    <!--DELETE FROM shoppingcar WHERE scarid in-->
+    <!--<foreach collection="list" item="scarid" open="(" separator="," close=")">-->
+    <!--#{scarid}-->
+    <!--</foreach>-->
+    <!--</delete>-->
+
+    <!--<update id="updateShoppingScarcount" parameterType="com.chenjiahao.rouge.entity.Shoppingcar">-->
+    <!--UPDATE shoppingcar-->
+    <!--SET scarcount = #{scarcount}-->
+    <!--WHERE scarid = #{scarid}-->
+    <!--</update>-->
+</mapper>

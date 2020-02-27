@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="rouge_Dao" />
+        <module name="rouge_Entity" />
+        <module name="rouge_Service" />
+        <module name="rouge_UI" />
+        <module name="rouge_Utils" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Rouge" target="1.5" />
+      <module name="rouge_Dao" target="1.5" />
+      <module name="rouge_Entity" target="1.5" />
+      <module name="rouge_Service" target="1.5" />
+      <module name="rouge_UI" target="1.7" />
+      <module name="rouge_Utils" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

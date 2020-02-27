@@ -1,0 +1,68 @@
+#body {
+  width: 950px;
+  margin: 30px auto; }
+
+#body > div {
+  width: 700px;
+  height: 400px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #9A9A9A; }
+
+#body > div > h1 {
+  color: #636363;
+  font-size: 30px; }
+
+label {
+  display: inline-block;
+  width: 100px;
+  margin-right: 10px;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  font-size: 13px; }
+
+label[class=right] {
+  margin-left: 40px; }
+
+input, select {
+  width: 200px;
+  border: none;
+  height: 30px;
+  background-color: #EBEBEB;
+  border-radius: 10px;
+  text-indent: 10px;
+  outline: none;
+  font-size: 12px; }
+
+input[type=checkbox] {
+  width: 15px; }
+
+button {
+  width: 100px;
+  height: 30px;
+  background: #020202;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  float: right;
+  margin-right: 20px; }
+
+p {
+  height: 50px;
+  font-size: 13px;
+  line-height: 50px; }
+
+#msg {
+  color: red; }
+
+#verification {
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background: #EBEBEB;
+  margin-left: 10px; }
+
+/*# sourceMappingURL=logon.css.map */

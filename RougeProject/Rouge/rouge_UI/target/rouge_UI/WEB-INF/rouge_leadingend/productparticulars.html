@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="stylesheet" href="../../css/productparticulars.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/font.css"/>
+</head>
+
+<body>
+<div id="big">
+    <div id="header">
+        <div class="header_logo">Rouge</div>
+        <div class="header_title">COMMODITY PARTICULARS</div>
+    </div>
+    <hr width="90%" style="margin: auto;"/>
+
+    <div id="propar">
+        <div>
+            <!--<div id="main">-->
+            <!--<div class="main_img">-->
+            <!--<ul>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_1.jpg"></li>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_2.jpg"></li>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_3.jpg"></li>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_4.jpg"></li>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_5.jpg"></li>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_6.jpg"></li>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_7.jpg"></li>-->
+            <!--<li><img width:100% height:100% src="../../img/xq/xq_6.jpg"></li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--<div class="main_particulars">-->
+            <!--<div class="main_particulars_title">-->
+            <!--<div class="main_particulars_title_tag">#Best Seller</div>-->
+            <!--<div class="main_particulars_title_name">DIOR迪奥凝脂恒久气垫粉底</div>-->
+            <!--<div class="main_particulars_title_type">Dior迪奥首款锁妆气垫</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<hr style="width: 90%; margin: auto;" />&ndash;&gt;-->
+
+            <!--<div class="main_particulars_type">-->
+            <!--<div class="main_particulars_type_color">-->
+            <!--<div style="background: #DFBDA6;"></div>-->
+            <!--<div style="background: #E0BBA9;"></div>-->
+            <!--<div style="background: #CD9D82;"></div>-->
+            <!--<div style="background: #CD9D82;"></div>-->
+            <!--</div>-->
+            <!--<div class="main_particulars_type_size">-->
+            <!--<div>3g</div>-->
+            <!--<div>5g</div>-->
+            <!--<div>9g</div>-->
+            <!--<div>10g</div>-->
+            <!--</div>-->
+            <!--<div class="main_particulars_compare">比较</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<hr style="width: 90%; margin: auto;" />&ndash;&gt;-->
+
+            <!--<div class="main_particulars_select">-->
+            <!--<div class="main_particulars_select_modulebig">-->
+            <!--<div>-->
+            <!--<div style="background: #DFBDA6;"></div>-->
+            <!--<span>10g</span>-->
+            <!--<span>￥490.00</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="main_particulars_actions">-->
+            <!--<div>-->
+            <!--<div>订购</div>-->
+            <!--<div><i class="main_particulars_actions_div_div_aixin">&#xe813;</i></div>-->
+            <!--</div>-->
+            <!--<div><a href="index.html">寻找精品店</a></div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div id="introduce">-->
+            <!--<div>-->
+            <!--<div>描述</div>-->
+            <!--<div>最终彩妆妆效</div>-->
+            <!--<div>上妆建议</div>-->
+            <!--<div>彩妆刷</div>-->
+            <!--<div>配方</div>-->
+            <!--<div>色彩</div>-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<div>Dior迪奥全新锁妆气垫*，清新柔润质地结合极为细腻的哑雾因子，如同一抹轻透薄纱，修饰隐匿肌肤瑕疵，瞬间打造立体哑光。 *注册名：Dior迪奥凝脂恒久气垫粉底-->
+            <!--Dior迪奥凝脂恒久气垫粉底轻松易携，提供替换芯可供选购，低碳环保。 Dior迪奥凝脂恒久气垫粉底轻松易携，提供替换芯可供选购，低碳环保。-->
+            <!--Dior迪奥凝脂恒久气垫粉底轻松易携，提供替换芯可供选购，低碳环保。 Dior迪奥凝脂恒久气垫粉底轻松易携，提供替换芯可供选购，低碳环保。-->
+            <!--Dior迪奥凝脂恒久气垫粉底轻松易携，提供替换芯可供选购，低碳环保。-->
+            <!--Dior迪奥凝脂恒久气垫粉底轻松易携，提供替换芯可供选购，低碳环保。-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+
+    </div>
+</div>
+
+
+<script src="../../js/template/template-web.js"></script>
+
+<!--渲染详情页面的的模板-->
+<script type="text/html" id="showpropar">
+    {{each data propar index}}
+    <div id="main">
+        <div class="main_img">
+            <ul>
+                {{each propar.commodityimgs comimg index}}
+                <li><img width:100% height:100% src="/goods_img/{{comimg.imgpath}}"></li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="main_particulars">
+            <div class="main_particulars_title">
+                <div class="main_particulars_title_tag" id="propar_comdescribe_diyparam_english"></div>
+                <div class="main_particulars_title_name">{{propar.comname}}</div>
+                <div class="main_particulars_title_type" id="propar_comdescribe_diyparam_describe"></div>
+            </div>
+            <!--<hr style="width: 90%; margin: auto;" />-->
+
+            <div class="main_particulars_type">
+                {{if propar.comcolors!=null}}
+                <div class="main_particulars_type_color">
+                    {{each propar.comcolors comcolor index}}
+                    <div style="background-color:{{comcolor.color}}" data-color="{{comcolor.color}}"
+                         class="comcolor_color"></div>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{if propar.comsizes[0].size!=0}}
+                <div class="main_particulars_type_size">
+                    {{each propar.comsizes comsize index}}
+                    <div class="comsiz_size" data-size="{{comsize.size}}"> {{comsize.size}}g</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+                <div class="main_particulars_compare">比较</div>
+            </div>
+            <!--<hr style="width: 90%; margin: auto;" />-->
+
+            <div class="main_particulars_select">
+                <div class="main_particulars_select_modulebig">
+                    <div>
+                        {{if propar.comcolors!=""}}
+                        <div id="comcolor_color" style="background: {{propar.comcolors[0].color}};"></div>
+                        {{/if}}
+                        {{if propar.comsizes[0].size!=0}}
+                        <span id="comsiz_size">{{propar.comsizes[0].size}}g</span>
+                        {{/if}}
+                        {{if propar.comdiscount!=null}}
+                        <span>{{propar.comdiscount.discount}}折</span>
+                        <span>￥{{propar.comprice*propar.comdiscount.discount/10}}</span>
+                        {{else}}
+                        <span>￥{{propar.comprice}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_particulars_actions">
+                <div>
+                    <div id="addShoppingcar" data-comid="{{propar.comid}}">订购</div>
+                    <div><i class="main_particulars_actions_div_div_aixin">&#xe813;</i></div>
+                </div>
+                <div><a href="/">继续购物</a></div>
+            </div>
+        </div>
+    </div>
+    <div id="introduce">
+        <div>
+            <div class="describe introduce_div_first-child_div_first-child" data-comproduce="{{propar.comproduce}}">
+                描述
+            </div>
+            <div class="comDescribe">最终彩妆妆效</div>
+            <div class="comDescribe" data-comproduce="{{propar.describe.proposal}}">上妆建议</div>
+            <div class="comDescribe">彩妆刷</div>
+            <div class="comDescribe" data-comproduce="{{propar.describe.formula}}">配方</div>
+            <div class="comDescribe">色彩</div>
+        </div>
+        <div>
+            <div id="comproduceMsg"></div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<script src="../../js/jquery/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var toppx = 0;
+    var widthpx = 0
+    //监听滚动条事件
+    $(window).scroll(function () { //开始监听滚动条
+
+        //获取当前滚动条高度
+        var topp = $(document).scrollTop();
+        var main_img = $(".main_img").height();
+        var main = $("#main").width();
+        var main_particulars = $(".main_particulars").height();
+        var clientHeight = document.documentElement.clientHeight;
+        var clientWidth = document.documentElement.clientWidth;
+        if (((clientWidth - main) / 2) < 0) {
+            widthpx = 0;
+        } else {
+            widthpx = (clientWidth - main) / 2;
+        }
+        var body = $("body").height();
+
+        if (topp < 158) {
+            $(".main_particulars").css("position", "relative");
+            $(".main_particulars").css("top", "0px");
+            $(".main_particulars").css("right", "0px");
+        }
+        if (topp > 158) {
+            $(".main_particulars").css("position", "fixed");
+            $(".main_particulars").css("top", "50px");
+            $(".main_particulars").css("right", widthpx + "px");
+        }
+        if ((body - clientHeight - topp) < 260 + $("#comproduceMsg").height()) {
+            $(".main_particulars").css("position", "relative");
+            $(".main_particulars").css("top", (main_img - main_particulars) + "px");
+            $(".main_particulars").css("right", "0px");
+        }
+
+    })
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    (function () {
+        var propar = {
+            init() {
+                propar.getAllCommodityDetails();
+                propar.binding();
+            },
+            getAllCommodityDetails() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/getAllCommodityDetails?comid=" + getUrlParam("comid") + "",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        var html = template("showpropar", data);
+                        $("#propar").append(html);
+                        setTimeout(function () {
+                            $("#propar_comdescribe_diyparam_english").text(JSON.parse(data.data[0].comdescribe.diyparam).english);
+                            $("#propar_comdescribe_diyparam_describe").text(JSON.parse(data.data[0].comdescribe.diyparam).describe);
+                            $("#comproduceMsg").html(data.data[0].comproduce);
+                        }, 10);
+                    }
+                })
+            }, addShoppingcar(comid) {
+                $.ajax({
+                    type: "POST",
+                    url: "/rouge/addShoppingcar?comid=" + comid + "",
+                    data: "",
+                    //发送信息至服务器时内容编码类型，(默认: "application/x-www-form-urlencoded")
+                    // contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回的数据类型
+                    success: function (data) {
+                        if (data.code > 0) {
+                            alert("添加成功!");
+                        }else {
+                            top.location.href = "/leadingend/userhome?jump=personal";
+                        }
+                    }
+                });
+            }, binding() {
+                $("#propar").on("click", ".comDescribe", function () {
+                    $(this).parent().children().removeClass("introduce_div_first-child_div_first-child");
+                    $(this).addClass("introduce_div_first-child_div_first-child");
+                    $("#comproduceMsg").html($(this).data("comproduce"))
+                });
+                $("#propar").on("click", ".comcolor_color", function () {
+                    $("#comcolor_color").css("background", "" + ($(this).data("color") + ""));
+                });
+
+                $("#propar").on("click", ".comsiz_size", function () {
+                    $("#comsiz_size").text($(this).data("size") + "g");
+                });
+
+                $("#propar").on("click", "#addShoppingcar", function () {
+                    propar.addShoppingcar($(this).data("comid"));
+                });
+            }
+        }
+        propar.init();
+    })();
+</script>
+</body>
+
+</html>

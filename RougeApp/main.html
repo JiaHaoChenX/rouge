@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>rougeAPP主界面</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js" ></script>
+		<style>
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+			
+			ul {
+				list-style: none;
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			.under {
+				position: fixed;
+				width: 100%;
+				height: 50px;
+				background-color: white;
+				bottom: 0px;
+			}
+			
+			.under-ul>li,.content-circle-ul1>li,.content-option-ul1>li,.personage-data-ul1>li {
+				width: 33.3%;
+				float: left;
+				text-align: center;
+				padding-top: 5px;
+			}
+			.mui-slider-img1{
+				width: 100%;
+				height: 150px;
+				overflow: hidden;
+			}
+			.mui-title-span1{
+				line-height: 44px;
+			}
+			.content-circle{
+				margin: 10px 0;
+				background-color: white;
+				height: 120px;
+				width: 100%;
+			}
+			.content-option{
+				height: 120px;
+			}
+			.content-option-ul1>li{
+				border-top: 1px dashed #a6a6a6;
+			}
+			.content-option-li1{
+				border-right: 1px dashed #a6a6a6; ;
+			}
+			.content-option-ul1>li>a>p{
+				margin: 0 ;
+			}
+			.content-option-p1{
+				font-size: 18px;
+				color: #2D2D2D;
+			}
+			.content-option-p2{
+				font-size: 14px;
+				color: #a6a6a6;
+			}
+			.content-option-img1{
+				width: 64px;
+				height: 64px;
+				padding: 5px;
+				overflow: hidden;
+			}
+			
+			/*瀑布流布局*/
+			.content-show{
+				margin: 20px 7px 60px 7px;
+				column-count: 2;/*分俩列*/
+			}
+			.content-show-div1{
+				background-color: white;
+				overflow: hidden;
+				margin-top:20px ;
+				padding: 0 10px;
+				-moz-page-break-inside: avoid;
+				-webkit-column-break-inside: avoid;
+				break-inside: avoid;
+			}
+			.content-show-img1{
+				width: 100%;
+				overflow: hidden;
+			}
+			
+			.content-show-span1{
+				font-size: 18px;
+				color: #FF6600;
+			}
+			.content-show-span2{
+				float: right;
+				padding-right: 10px;
+			}
+			.content-show-span3{
+				color: #333333;
+			}
+			.shopping-cont{
+				border-top: 2px solid #DDDDDD;
+				margin: 50px 0;
+			}
+			.shopping-cont-div1{
+				background-color: white;
+				height: 135px;
+				width: 100%;
+				border-bottom:1px dashed #DDDDDD ;
+			}
+			.shopping-cont-span1{
+				font-size: 18px;
+				color: #FF0000;
+			}
+			.shopping-cont-radio1{
+				font-size: 18px;
+			}
+			.mui-radio{
+				font-size:0px ;
+			}
+			.shopping-cont-p1{
+				color: #333333;
+				font-size: 18px;
+				height: 22px;
+    			overflow: hidden;
+			}
+			.shopping-cont-span2{
+				float: right;
+				width: 110px;
+				height: 30px;
+				margin-right: 10px;
+				border: 1px solid #DDDDDD;
+			}
+			.shopping-cont-table1{
+				width: 100%;
+			}
+			.shopping-cont-td1{
+				text-align: center;
+				width: 15%;
+			}
+			.shopping-cont-td2{
+				width: 25%;
+			}
+			.shopping-cont-td3{
+				width: 60%;
+			}
+			.shopping-cont-img1{
+				width: 100px;
+				height: 130px;
+				overflow: hidden;
+			}
+			.shopping-cont-btn1{
+				border: none;
+				height: 28px;
+				width: 25px;
+				padding: 0;
+				margin: 0;
+			}
+			.shopping-cont-span3{
+				padding: 6px 20px;
+				border-left: 1px solid #DDDDDD;
+				border-right: 1px solid #DDDDDD;
+				line-height: 30px;
+			}
+			.shopping-fixation{
+				position: fixed;
+				width: 100%;
+				height: 52px;
+				background-color: white;
+				bottom: 53px;
+				border-top: 1px solid #DDDDDD;
+			}
+			.mui-left{
+				float: left;
+				width: 15%;    			
+			}
+			.shopping-fixation-span1{
+				line-height: 40px;
+			}
+			.shopping-fixation-div1{
+				float: right;
+				width: 60%;
+			}
+			.shopping-fixation-span2{
+				color:#FF0000;
+			}
+			.shopping-fixation-btn1{
+				
+				height: 50px;
+				width: 100%;
+				
+			}
+			.shopping-fixation-td1>p{
+				margin: 0;
+				padding: 0;
+				float: right;
+				margin: 0 5px;
+			}
+			.shopping-fixation-p1{
+				    width: 80%;
+				    height: 35px;
+				    margin: 7px 0;
+				    color: #FF0000;
+				    text-align: center;
+				    line-height: 35px;
+				    border-radius: 5px;
+				    border: 1px solid #FF0000;
+				
+			}
+			.shopping-fixation-div2{
+				float: right;
+				width: 20%;
+			}
+			.personage-data{
+				background-color: #F7F7F7;
+				width: 100%;
+				height: 200px;
+				text-align:center ;
+				margin-top: 45px;
+				padding-top: 15px;
+			}
+			.personage-data-img1{
+				border: 1px solid white;
+				border-radius:50% ;
+				width: 100px;
+				height: 100px;
+				overflow: hidden;
+			}
+			.personage-data-span1{
+				font-size: 18px;
+				color: #333333;
+			}
+			.personage-data-div1{
+				height: 100px;
+			}
+			
+			.personage-data-ul1>li>a>p{
+				margin: 0;padding: 0;
+				color: #333333;
+			} 
+			.personage-data-img2{
+				width: 48px;
+				height: 48px;
+				padding: 4px;
+				overflow: hidden;
+			}
+			.personage-data-div2{
+				width: 100%;
+				background-color: white;
+				margin-bottom: 60px;
+			}
+			.data-div2-div1{
+				height: 50px;
+				line-height: 50px;
+				padding: 0 5px;
+				border: 1px solid #DDDDDD;
+			}
+			.data-div2-span1{
+				float: right;
+				line-height: 50px;
+				
+			}
+			.shopping-fixation-div3{
+				float: left;
+				width: 60px;
+				height: 50px;
+			}
+			.choiceness,.shopping,.personage{
+				display:none;
+			}
+			div:target{ display:block;}
+		</style>
+	</head>
+
+	<body>
+		<!--隐藏精选的开始-->
+		<div  class="choiceness">
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
+			 <span class="mui-title-span1"  >rouge</span>
+			<h1 class="mui-title">
+				<a href="search.html">					
+			 		<input type="text" placeholder="请输入要搜索的内容" style="width: 85%;" />
+			 	</a>
+			</h1>
+			<button id='setting' class=" mui-pull-right mui-btn-link">设置</button>			
+		</header>
+		<!--中间的开始-->
+			<div class="mui-content">
+					<!--轮播图的开始-->
+					<div class="mui-slider">
+						<div class="mui-slider-group mui-slider-loop">
+							<!--支持循环，需要重复图片节点-->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="commdityDateils.html"><img class="mui-slider-img1" src="img/hb/hb2.jpg" /></a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="commdityDateils.html"><img class="mui-slider-img1" src="img/hb/hb1.jpg" /></a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#"><img class="mui-slider-img1" src="img/hb/hb3.jpg" /></a>
+							</div>
+							<!--支持循环，需要重复图片节点-->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#"><img class="mui-slider-img1" src="img/hb/hb1.jpg" /></a>
+							</div>
+						</div>
+						<!--轮播图的结束-->
+					</div>
+						
+					<!--轮播图下面的小圈圈导航开始-->
+					<div class="content-circle">
+						<ul class="content-circle-ul1">
+							<li>
+								<span class="mui-icon-extra mui-icon-extra-cate"></span>
+								<p>化妆</p>
+							</li>
+							<li>
+								<span class="mui-icon-extra mui-icon-extra-cate"></span>
+								<p>口红</p>
+							</li>
+							<li>
+								<span class="mui-icon-extra mui-icon-extra-cate"></span>
+								<p>腮红</p>
+							</li>
+							<li>
+								<span class="mui-icon-extra mui-icon-extra-cate"></span>
+								<p>护肤</p>
+							</li>
+							<li>
+								<span class="mui-icon-extra mui-icon-extra-cate"></span>
+								<p>洁面</p>
+							</li>
+							<li>
+								<span class="mui-icon-extra mui-icon-extra-cate"></span>
+								<p>精华</p>
+							</li>
+						</ul>
+					<!--轮播图下面的小圈圈导航结束-->
+					</div>
+					
+					<!--三个选项开始-->
+					<div class="content-option">
+						<ul class="content-option-ul1">
+							<li class="content-option-li1">
+								<a>
+									<p class="content-option-p1">Discount</p>
+									<p class="content-option-p2">折扣专区</p>
+									<p class="content-option-p3"><img src="img/zkk.png" /></p>
+								</a>
+							</li>
+							<li class="content-option-li1">
+								<a>
+									<p class="content-option-p1">Popularity</p>
+									<p class="content-option-p2">大众所向</p>
+									<p ><img class="content-option-img1" src="img/daz.png" /></p>
+								</a>
+							</li>
+							<li>
+								<a>
+									<p class="content-option-p1">AllGoods</p>
+									<p class="content-option-p2">所有宝贝</p>
+									<p ><img class="content-option-img1" src="img/qb.png" /></p>
+								</a>
+							</li>
+						</ul>
+					<!--三个选项结束-->
+					</div>
+						
+					<!--下面全部商品的显示开始-->	
+					<div class="content-show">
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<a href="commdityDateils.html">
+							<p>
+								<img class="content-show-img1" src="img/xxi/xxi_1.JPG" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge小黑盒气垫</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥270</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+							</a>
+						<!--一个商品的结束-->
+						</div>
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r3.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge烈艳蓝金液唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥270</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r3.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge烈艳蓝金液唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥270</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r2.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge魅惑唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥230</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r3.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge烈艳蓝金液唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥270</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r3.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge烈艳蓝金液唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥270</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r2.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge魅惑唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥230</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r3.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge烈艳蓝金液唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥270</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r3.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge烈艳蓝金液唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥270</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+						
+						<!--一个商品的开始-->
+						<div class="content-show-div1">
+							<p>
+								<img class="content-show-img1" src="img/r/r2.png" />
+							</p>
+							<p>
+								<span class="content-show-span3">Rouge烈艳蓝金液唇膏</span>
+							</p>
+							<p>
+								<span class="content-show-span1">￥230</span>
+								<span>9折</span>
+								<span class="content-show-span2"><del>300</del></span>
+							</p>
+						<!--一个商品的结束-->
+						</div>
+					<!--下面全部商品的显示结束-->	
+					</div>
+				
+				<div class="mui-content-padded">
+					<!--<p>
+						您好 <span id='account'></span>，您已成功登录。
+					</p>-->
+				</div>
+				<!--中间的结束-->	
+			</div>
+		<!--隐藏精选的结束-->		
+		</div>
+		<!--隐藏购物车开始-->
+		<div  id="shopping" class="shopping">
+			<!--头部-->
+			<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
+				 <span class="mui-icon mui-icon-back"  ></span>
+				<h1 class="mui-title">
+				 	<span>我的购物车</span>
+				</h1>
+				<button class="shopping-update mui-pull-right mui-btn-link">编辑</button>			
+			</header>
+			<!--购物车中间的内容开始-->
+			<div class="shopping-cont">
+				<ul>
+					<!--购物车中一个商品的开始-->
+					<li>
+						<div class="shopping-cont-div1">
+							<table class="shopping-cont-table1">
+								<tr class="shopping-cont-ul1">
+									<td class="shopping-cont-td1">
+										<div class=" mui-input-row mui-checkbox">
+											 <label style="padding: 13px 15px;padding-right: 40px;"></label>
+											 <input name="checkbox1" value="Item 1" type="checkbox" >
+										</div>
+									</td>
+									<td class="shopping-cont-td2">
+										<img class="shopping-cont-img1"  src="img/r/r3.png"/>
+									</td>
+									<td class="shopping-cont-td3">
+										<p class="shopping-cont-p1">Rouge烈艳蓝金液唇膏</p>
+										<p>颜色：502号色</p>
+										<p>
+											<span class="shopping-cont-span1">￥299</span>
+											<span  class="shopping-cont-span2">
+												<button class="shopping-cont-btn1">+</button>
+												<span class="shopping-cont-span3">1</span>
+												<button class="shopping-cont-btn1">-</button>
+											</span>
+										</p>	
+									</td>
+								</tr>
+							</table>
+						</div>
+					<!--购物车中一个商品的结束-->
+					</li>
+					<!--购物车中一个商品的开始-->
+					<li>
+						<div class="shopping-cont-div1">
+							<table class="shopping-cont-table1">
+								<tr class="shopping-cont-ul1">
+									<td class="shopping-cont-td1">
+										<div class=" mui-input-row mui-checkbox">
+											 <label style="padding: 13px 15px;padding-right: 40px;"></label>
+											 <input name="checkbox1" value="Item 1" type="checkbox" >
+										</div>
+									</td>
+									<td class="shopping-cont-td2">
+										<img class="shopping-cont-img1"  src="img/r/r3.png"/>
+									</td>
+									<td class="shopping-cont-td3">
+										<p class="shopping-cont-p1">Rouge烈艳蓝金液唇膏</p>
+										<p>颜色：502号色</p>
+										<p>
+											<span class="shopping-cont-span1">￥299</span>
+											<span  class="shopping-cont-span2">
+												<button class="shopping-cont-btn1">+</button>
+												<span class="shopping-cont-span3">1</span>
+												<button class="shopping-cont-btn1">-</button>
+											</span>
+										</p>	
+									</td>
+								</tr>
+							</table>
+						</div>
+					<!--购物车中一个商品的结束-->
+					</li>
+					<!--购物车中一个商品的开始-->
+					<li>
+						<div class="shopping-cont-div1">
+							<table class="shopping-cont-table1">
+								<tr class="shopping-cont-ul1">
+									<td class="shopping-cont-td1">
+										<div class=" mui-input-row mui-checkbox">
+											 <label style="padding: 13px 15px;padding-right: 40px;"></label>
+											 <input name="checkbox1" value="Item 1" type="checkbox" >
+										</div>
+									</td>
+									<td class="shopping-cont-td2">
+										<img class="shopping-cont-img1"  src="img/r/r3.png"/>
+									</td>
+									<td class="shopping-cont-td3">
+										<p class="shopping-cont-p1">Rouge烈艳蓝金液唇膏</p>
+										<p>颜色：502号色</p>
+										<p>
+											<span class="shopping-cont-span1">￥299</span>
+											<span  class="shopping-cont-span2">
+												<button class="shopping-cont-btn1">+</button>
+												<span class="shopping-cont-span3">1</span>
+												<button class="shopping-cont-btn1">-</button>
+											</span>
+										</p>	
+									</td>
+								</tr>
+							</table>
+						</div>
+					<!--购物车中一个商品的结束-->
+					</li>
+					
+				</ul>
+			<!--购物车中间的内容结束-->	
+			</div>
+	
+			<!--固定的结算开始-->
+			<div class="shopping-fixation">
+				<!--左边的全选开始-->
+					<div class="shopping-fixation-div3 mui-input-row mui-checkbox">
+					  <label></label>
+					  <input name="checkbox1" value="Item 1" type="checkbox" >
+					</div>
+					<span class="shopping-fixation-span1">全选</span> 
+					<!--左边的全选结束-->
+					<!--右边的结算开始--><!--隐藏的结算开始-->
+					<div  class="shopping-fixation-div1">
+						<table style="height: 40px; width: 100%; overflow: hidden;">
+							<tr>
+								<td class="shopping-fixation-td1">
+									<p>合计：<span class="shopping-fixation-span2">￥299</span></p>
+									<p>不含配送费</p>
+								</td>
+								<td style="width: 50%;">
+									<a href="affirm.html">
+										<input type="button" value="去结算" class="shopping-fixation-btn1" style="border: none;color: white;background-color: #FF6600;" />
+									</a>
+								</td>
+							</tr>
+						</table>
+					<!--右边的结算结束--><!--隐藏的结算结束-->
+					</div>
+					<!--隐藏删除的开始-->
+					<div hidden="hidden" class="shopping-fixation-div2">
+						<p class="shopping-fixation-p1">删除</p>
+					<!--隐藏删除的开始-->
+					</div>
+				
+				
+			<!--固定的结算结束-->
+			</div>
+		<!--购物车的结束-->		
+		</div>	
+		<!--隐藏我的个人信息开始-->
+		<div  class="personage">
+			<!--个人信息的头部-->			
+			<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
+				 <span class="mui-icon mui-icon-back"  ></span>
+				<h1 class="mui-title">
+				 	<span>个人中心</span>
+				</h1>				
+			</header>
+			<!--上面的资料开始-->
+			<div class="personage-data">
+				<p>
+					<img class="personage-data-img1" src="img/xq/xq_4.jpg" />
+				</p>
+				<p><span class="personage-data-span1">超级无敌赛亚人</span></p>
+				<p>等级：<span>黄金</span></p>
+				<!--上面的资料结束-->
+			</div>
+			<!--中间订单状态的开始-->
+			<div class="personage-data-div1">
+				<ul class="personage-data-ul1">
+					<li>
+						<a href="myOrder.html">
+							<p><img class="personage-data-img2" src="img/daifukuan.png"/></p>
+							<p>待付款</p>
+						</a>
+						
+					</li>
+					<li>
+						<a href="myOrder.html">
+							<p><img class="personage-data-img2" src="img/daifahuo.png"/></p>
+							<p>待发货</p>
+						</a>
+					</li>
+					<li>
+						<a href="myOrder.html">
+							<p><img src="img/daishuo.png"/></p>
+							<p>待收货</p>
+						</a>
+					</li>
+				</ul>
+			<!--中间订单状态的结束-->
+			</div>
+			<!--白色部分一些内容开始-->
+			<div class="personage-data-div2">
+				<!--我的评价开始-->
+				<a  href="myOrder.html" style="color: #333333;">
+					<div class="data-div2-div1">
+						
+						<span class="mui-icon-extra mui-icon-extra-order"></span>&nbsp;
+						<span>我的评价</span>
+						<span class="data-div2-span1 mui-icon mui-icon-arrowright"></span>
+						
+					<!--我的评价结束-->
+					</div>
+				</a>
+				<!--全部订单开始-->
+				<a  href="myOrder.html" style="color: #333333;">
+					<div class="data-div2-div1">
+						<span class="mui-icon mui-icon-list"></span>&nbsp;
+						<span>全部订单</span>
+						<span class="data-div2-span1 mui-icon mui-icon-arrowright"></span>
+					<!--全部订单结束-->
+					</div>
+				</a>
+				<!--我的收藏开始-->
+				<div class="data-div2-div1">
+					<span class="mui-icon-extra mui-icon-extra-heart"></span>&nbsp;
+					<span>我的收藏</span>
+					<span class="data-div2-span1 mui-icon mui-icon-arrowright"></span>
+				<!--我的收藏结束-->
+				</div>
+				<!--管理收货地址开始-->
+				<a href="address.html" style="color: #333333;">
+					<div class="data-div2-div1">
+						<span class="mui-icon mui-icon-location"></span>&nbsp;
+						<span>管理收货地址</span>
+						<span class="data-div2-span1 mui-icon mui-icon-arrowright"></span>
+					<!--管理收货地址结束-->
+					</div>
+				</a>
+			<!--白色部分一些内容结束-->
+			</div>
+		<!--隐藏我的个人信息结束-->
+		</div>
+		<!--底部开始-->
+		<div class="under">
+			<ul class="under-ul">
+				<li class="under-ul-li1">
+					<span class="mui-icon mui-icon-home"></span>
+					<p>精选</p>
+				</li>
+				<li class="under-ul-li2" id="gwc">
+					<span class="mui-icon-extra mui-icon-extra-cart"></span>
+					<p>购物车</p>
+				</li>
+				<li class="under-ul-li3">
+					<span class="mui-icon mui-icon-person"></span>
+					<p>我的</p>
+				</li>
+			</ul>
+			<!--底部结束-->
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			(function($, doc) {
+				$.init();
+				var settings = app.getSettings();
+				var account = doc.getElementById('account');
+				//
+				window.addEventListener('show', function() {
+					var state = app.getState();
+					account.innerText = state.account;
+				}, false);
+				$.plusReady(function() {
+					var settingPage = $.preload({
+						"id": 'setting',
+						"url": 'setting.html'
+					});
+					//设置
+					var settingButton = doc.getElementById('setting');
+					//settingButton.style.display = settings.autoLogin ? 'block' : 'none';
+					settingButton.addEventListener('tap', function(event) {
+						$.openWindow({
+							id: 'setting',
+							show: {
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					});
+					//--
+					$.oldBack = mui.back;
+					var backButtonPress = 0;
+					$.back = function(event) {
+						backButtonPress++;
+						if(backButtonPress > 1) {
+							plus.runtime.quit();
+						} else {
+							plus.nativeUI.toast('再按一次退出应用');
+						}
+						setTimeout(function() {
+							backButtonPress = 0;
+						}, 1000);
+						return false;
+					};
+
+				});
+
+				//获得slider插件对象图片轮播
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+
+			}(mui, document));
+			;
+			(function(win, $) {
+				/*//首次加载显示精选
+				$(".choiceness").css("display","block");
+				$('.shopping').css('display')=='block'
+				*/
+		var target =$('.shopping').is(":target");
+				//$('div').attr('target','_blank');
+				if(target>=1){
+					$(".choiceness").css("display","none");
+				}else{
+					$(".choiceness").css("display","block");
+				}
+				
+				/*精选的点击事件*/
+				$(".under-ul-li1").mousedown(function(){
+					$(".shopping,.personage").css("display","none");
+					$(".choiceness").css("display","block");
+					
+				});
+				/*购物车的点击事件*/
+				$(".under-ul-li2").mousedown(function(){
+					$(".choiceness,.personage").css("display","none");
+					$(".shopping").css("display","block");
+				});
+				/*我的个人中心点击事件*/
+				$(".under-ul-li3").mousedown(function(){
+					$(".choiceness,.shopping").css("display","none");
+					$(".personage").css("display","block");
+				})
+				
+				//点击购物车里面的编辑
+				$(".shopping-update").mousedown(function(){
+					var btn1=$(".shopping-update").text();					
+					if(btn1=="编辑"){
+						$(".shopping-update").html("完成");
+						$(".shopping-fixation-div1").prop("hidden","hidden");
+						$(".shopping-fixation-div2").prop("hidden","");						
+					}else if(btn1=="完成"){
+						$(".shopping-update").html("编辑");
+						$(".shopping-fixation-div2").prop("hidden","hidden");
+						$(".shopping-fixation-div1").prop("hidden","");						
+					}
+				});
+				
+				
+				
+				})(window, $);
+			
+		</script>
+	</body>
+
+</html>

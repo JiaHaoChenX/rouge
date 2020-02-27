@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.chenjiahao.rouge.dao.ISiteDao">
+    <insert id="addSite" parameterType="com.chenjiahao.rouge.entity.Site">
+        INSERT INTO `site` (aid, sitename, sitephone, siteprovince, sitecity, sitecounty, sitedetailed) VALUES
+            (#{aid}, #{sitename}, #{sitephone}, #{siteprovince}, #{sitecity}, #{sitecounty}, #{sitedetailed})
+    </insert>
+
+    <select id="getSite" resultType="com.chenjiahao.rouge.entity.Site"
+            parameterType="java.lang.String">
+        SELECT *
+        FROM site
+        WHERE aid = #{aid}
+    </select>
+    <update id="updateSite" parameterType="com.chenjiahao.rouge.entity.Site">
+        UPDATE site
+        SET sitename   = #{sitename}, sitephone = #{sitephone }, siteprovince = #{siteprovince}, sitecity = #{sitecity},
+            sitecounty = #{sitecounty}, sitedetailed = #{sitedetailed}
+        WHERE siteid = #{siteid}
+    </update>
+
+    <delete id="delSite">
+        DELETE FROM site WHERE siteid in
+        <foreach collection="list" item="siteid" open="(" separator="," close=")">
+            #{siteid}
+        </foreach>
+    </delete>
+
+</mapper>
